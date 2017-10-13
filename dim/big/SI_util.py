@@ -29,7 +29,7 @@ def selectFun(columns, tab, start, num, db='spider'):
 	select_sql = """select {columns} from {tab} limit {start}, {num}""".format(
 		columns=columns, tab=tab, start=start, num=num)
 	print(select_sql)
-	select_con, select_cur = _sqlObj(db)
+	select_con, select_cur = _sqlObj1(db)
 	try:
 		select_cur.execute(select_sql)
 		results = select_cur.fetchall()
