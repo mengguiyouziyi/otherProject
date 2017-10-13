@@ -20,11 +20,11 @@ sel_inser_list = [
 
 	# 新实例增量
 	# base
-	# tyc.tyc_jichu_quan   7976988
-	# {'sel_columns': 'quan_cheng, tongyi_xinyong, qiye_leixing, fa_ren, zhuce_ziben, zhuce_shijian, dengji_jiguan, yingye_nianxian, jingying_zhuangtai, hezhun_riqi, jingying_fanwei',
-	# 'sel_table': 'tyc_jichu_quan', 'db': 'tianyancha',
-	# 'inser_table': 'comp_base_tyc',
-	# 'inser_columns': '(comp_full_name, CreditCode, EconKind, LegalPerson, RegistCapi, CreateTime, BelongOrg, BusinessLife, RegistStatus, CheckDate, BusinessScope)'},
+	# tianyancha.tyc_jichu_quan   7976988
+	{'sel_columns': 'quan_cheng, tongyi_xinyong, qiye_leixing, fa_ren, zhuce_ziben, zhuce_shijian, dengji_jiguan, yingye_nianxian, jingying_zhuangtai, hezhun_riqi, jingying_fanwei',
+	'sel_table': 'tyc_jichu_quan', 'db': 'tianyancha',
+	'inser_table': 'comp_base_tyc',
+	'inser_columns': '(comp_full_name, CreditCode, EconKind, LegalPerson, RegistCapi, CreateTime, BelongOrg, BusinessLife, RegistStatus, CheckDate, BusinessScope)'},
 
 	# base 补全
 	# tyc.tyc_jichu_quan
@@ -62,7 +62,7 @@ sel_inser_list = [
 	# intro
 	# tianyancha.tyc_jichu_quan
 	# {'sel_columns': 'quan_cheng, c_desc', 'sel_table': 'tyc_jichu_quan', 'db': 'tianyancha',
-	#  'inser_table': 'comp_web_tyc', 'inser_columns': '(comp_full_name, intro)'},
+	#  'inser_table': 'comp_intro_tyc', 'inser_columns': '(comp_full_name, intro)'},
 
 
 
@@ -101,8 +101,8 @@ sel_inser_list = [
 
 	# intro
 	# tyc.tyc_jichu_quan
-	{'sel_columns': 'quan_cheng, c_desc', 'sel_table': 'tyc_jichu_quan', 'db': 'tyc',
-	 'inser_table': 'comp_intro_tyc', 'inser_columns': '(comp_full_name, intro)'},
+	# {'sel_columns': 'quan_cheng, c_desc', 'sel_table': 'tyc_jichu_quan', 'db': 'tyc',
+	#  'inser_table': 'comp_intro_tyc', 'inser_columns': '(comp_full_name, intro)'},
 ]
 ##########################################################################################
 """
