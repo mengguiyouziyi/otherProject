@@ -24,18 +24,25 @@ def isRegister(_oneid):
 
 
 def insert_redis():
-	sql_config = {'host': 'etl1.innotree.org',
+	sql_config = {'host': '47.95.31.183',
+	             'port': 3306,
+	             'user': 'test',
+	             'password': '123456',
+	             # 'db': 'innotree_data_online',
+	             'charset': 'utf8',
+	             'cursorclass': pymysql.cursors.DictCursor}
+	mysql1 = get_mysql_con(config=sql_config)
+	mysql1.select_db(db='innotree_data_online')
+	cur1 = mysql1.cursor()
+
+	aa_config = {'host': 'etl1.innotree.org',
 	              'port': 3308,
 	              'user': 'spider',
 	              'password': 'spider',
 	              # 'db': 'dimension_result',
 	              'charset': 'utf8',
 	              'cursorclass': pymysql.cursors.DictCursor}
-	mysql1 = get_mysql_con(config=sql_config)
-	mysql1.select_db(db='dw_dim_online')
-	cur1 = mysql1.cursor()
-
-	mysql2 = get_mysql_con(config=sql_config)
+	mysql2 = get_mysql_con(config=aa_config)
 	mysql2.select_db(db='dimension_sum')
 	cur2 = mysql2.cursor()
 	try:
