@@ -18,9 +18,9 @@ sel_inser_list = [
 
 
 
-	# xinshili
+	# 新实例增量
 	# base
-	# tyc.tyc_jichu_quan
+	# tyc.tyc_jichu_quan   7976988
 	# {'sel_columns': 'quan_cheng, tongyi_xinyong, qiye_leixing, fa_ren, zhuce_ziben, zhuce_shijian, dengji_jiguan, yingye_nianxian, jingying_zhuangtai, hezhun_riqi, jingying_fanwei',
 	# 'sel_table': 'tyc_jichu_quan', 'db': 'tianyancha',
 	# 'inser_table': 'comp_base_tyc',
@@ -35,12 +35,12 @@ sel_inser_list = [
 
 
 	# website
-	# tyc.tyc_jichu_quan 6215508
+	# tyc.tyc_jichu_quan 7976622
 	# {'sel_columns': 'quan_cheng, w_eb', 'sel_table': 'tyc_jichu_quan', 'db': 'tianyancha',
 	#  'inser_table': 'comp_web_tyc', 'inser_columns': '(comp_full_name, web_url)'},
 
 	# logo
-	# tyc.tyc_jichu_quan 6215508
+	# tyc.tyc_jichu_quan 7976622
 	# {'sel_columns': 'quan_cheng, logo', 'sel_table': 'tyc_jichu_quan', 'db': 'tianyancha',
 	#  'inser_table': 'comp_logo_tyc', 'inser_columns': '(comp_full_name, logo_url)'},
 

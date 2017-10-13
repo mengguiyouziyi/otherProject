@@ -109,7 +109,7 @@ def _sqlObj1(db):
 def main(*args):
 	columns_list = args[0].split(',')
 	num = len(columns_list)
-	start = i = 3000000
+	start = i = 7976622
 	while True:
 		results = selectFun(args[0], args[1], start, 500000, db=args[2])
 		if not results:
@@ -139,10 +139,11 @@ def main(*args):
 
 
 if __name__ == '__main__':
-	select_columns = "quan_cheng, logo"
-	select_table = "tyc_jichu_chuisou"
-
-	insert_table = "comp_logo_tyc"
-	insert_columns = "(comp_full_name, logo_url)"
-	args = [select_columns, select_table, insert_table, insert_columns]
-	main(*args)
+	# select_columns = "quan_cheng, logo"
+	# select_table = "tyc_jichu_chuisou"
+	#
+	# insert_table = "comp_logo_tyc"
+	# insert_columns = "(comp_full_name, logo_url)"
+	# args = [select_columns, select_table, insert_table, insert_columns]
+	# main(*args)
+	pass
