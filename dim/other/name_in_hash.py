@@ -1,9 +1,9 @@
 """
-255之外补录的数据
+255之外补录的数据（只有name）
 步骤：
-1、dw_dim_online.company_bulu_it取出公司
+1、dw_dim_online.company_bulu_it 取出公司
 2、dimension_sum.com_dictionaries 查询only_id
-3、放入redis 8800_only_id 中
+3、放入redis xx_only_id 中
 """
 import pymysql
 import redis
