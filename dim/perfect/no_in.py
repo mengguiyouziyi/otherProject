@@ -3,7 +3,7 @@
 """
 
 import pymysql
-from outAndIn import get_mysql_con, get_redis_db, get_redis_allhash
+from outAndIn import get_mysql_con, get_redis_db, get_redis_allhash, in_redis_hash
 
 # sel_config = {'host': 'etl1.innotree.org',
 #               'port': 3308,
@@ -53,20 +53,36 @@ id_cha_list = list(set(id_name.keys()) - set(result_dict.keys()))
 
 # redis_dict = {'comp_id': id_name, 'comp_full_name': id_name}
 
-# 将这部分差集放入 company_base_info_nohave
-in_sql = """insert into company_base_info_nohave (comp_id, comp_full_name) VALUES (%s, %s)"""
+# # 将这部分差集放入 company_base_info_nohave
+# in_sql = """insert into company_base_info_nohave (comp_id, comp_full_name) VALUES (%s, %s)"""
+# value_list = [[id, id_name[id]] for id in id_cha_list]
+# # print(value_list[0])
+# m = []
+# for i, n in enumerate(value_list):
+# 	m.append(n)
+# 	print(i)
+# 	if len(m) == 50000:
+# 		cur.executemany(in_sql, args=value_list)
+# 		con.commit()
+# 		m.clear()
+# 	else:
+# 		continue
+# cur.executemany(in_sql, args=value_list)
+# con.commit()
+# con.close()
+
+# 将这部分数据放入 redis
 value_list = [[id, id_name[id]] for id in id_cha_list]
-# print(value_list[0])
-m = []
-for i, n in enumerate(value_list):
-	m.append(n)
-	print(i)
-	if len(m) == 50000:
-		cur.executemany(in_sql, args=value_list)
-		con.commit()
-		m.clear()
-	else:
-		continue
-cur.executemany(in_sql, args=value_list)
-con.commit()
-con.close()
+start = 0
+for result in value_list:
+	start += 1
+	print(start)
+	in_redis_hash(redis_db, 'intro_no_only_id', result[0], result[1])
+
+
+
+
+
+
+
+
