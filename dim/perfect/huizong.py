@@ -18,6 +18,7 @@ col_dict = {'comp_id': 'only_id', 'comp_full_name': 'comp_full_name', 'comp_shor
 
 in_cols = col_dict.keys()  # 插入字段
 in_col_str = '(' + ','.join(in_cols) + ')'  # 构建sql语句中的插入字段
+
 sel_config = {'host': 'etl1.innotree.org',
               'port': 3308,
               'user': 'spider',
@@ -41,7 +42,7 @@ in_con = get_mysql_con(config=in_config)
 in_cur = in_con.cursor()
 # 创建redis连接并获取所有only_id
 redis_db = get_redis_db(host='a027.hb2.innotree.org')
-only_ids = get_redis_field(redis_db, '2622_only_id_all')
+only_ids = get_redis_field(redis_db, '19ge_only_id')
 # olss = [[110, 120, 130, ....], [111, 121, 131], [112, 122, 132], ......]
 olss = [[only_id.decode('utf-8') for only_id in only_ids if only_id.decode('utf-8').endswith(str(i))] for i in
         range(0, 10)]
