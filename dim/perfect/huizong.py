@@ -102,7 +102,7 @@ def a(i):
 
 try:
 	# for i in [0,1,5,6,9,2]:
-	a(5)
+	a(6)
 finally:
 	sel_con.close()
 	in_con.close()
