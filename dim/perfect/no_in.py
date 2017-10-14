@@ -46,7 +46,7 @@ id_name = {k.decode('utf-8'): v.decode('utf-8') for k, v in id_names.items()}
 # print(type(id_name))
 
 # 取两个的差集（redis - company_base_info）
-id_cha_list = list(set(id_name.keys()) ^ set(result_dict.keys()))
+id_cha_list = list(set(id_name.keys()) - set(result_dict.keys()))
 # print(id_cha_list[:3])
 # chas = [{'comp_id': cha, 'comp_full_name': id_name[cha]} for cha in cha_list]
 # cha_dict = {cha: id_name[cha] for cha in cha_list}
