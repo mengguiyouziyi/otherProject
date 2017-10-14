@@ -4,7 +4,7 @@
 
 import pymysql
 import redis
-from outAndIn import get_redis_db, in_redis_hash, get_mysql_con, sel_fun
+from tools import get_redis_db, in_redis_hash, get_mysql_con
 
 
 def isRegister(_oneid):
