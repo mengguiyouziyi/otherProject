@@ -42,7 +42,9 @@ in_con = get_mysql_con(config=in_config)
 in_cur = in_con.cursor()
 # 创建redis连接并获取所有only_id
 redis_db = get_redis_db(host='a027.hb2.innotree.org')
-only_ids = get_redis_field(redis_db, '19ge_only_id')
+
+only_ids = get_redis_field(redis_db, 'tag_only_id')
+
 # olss = [[110, 120, 130, ....], [111, 121, 131], [112, 122, 132], ......]
 olss = [[only_id.decode('utf-8') for only_id in only_ids if only_id.decode('utf-8').endswith(str(i))] for i in
         range(0, 10)]
@@ -99,8 +101,8 @@ def a(i):
 	in_con.commit()
 
 try:
-	for i in [0,1,5,6,9,2]:
-		a(i)
+	# for i in [0,1,5,6,9,2]:
+	a(0)
 finally:
 	sel_con.close()
 	in_con.close()
