@@ -2,7 +2,7 @@
 将某个纬度的十张表，id和full_name全部入到redis中
 """
 import pymysql
-from .outAndIn import get_mysql_con, get_redis_db, in_redis_hash
+from outAndIn import get_mysql_con, get_redis_db, in_redis_hash
 
 sel_config = {'host': 'etl1.innotree.org',
               'port': 3308,
