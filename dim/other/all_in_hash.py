@@ -44,5 +44,5 @@ start = 0
 for result in results:
 	start += 1
 	print(start)
-	if isRegister(result['only_id']):
+	if isRegister(result['comp_id']):
 		in_redis_hash(redis_db, 'tag_only_id', result['comp_id'], result['comp_full_name'])
