@@ -18,6 +18,7 @@ redis_db = get_redis_db(host='a027.hb2.innotree.org')
 start = 0
 # while True:
 # results = sel_fun(mysql, 'innotree_data', 'company_base_info_nohave', 'comp_full_name,comp_id', start)
+# sql = """select comp_full_name,comp_id from company_base_info_nohave"""
 sql = """select comp_full_name,comp_id from company_base_info_nohave"""
 cur.execute(sql)
 results = cur.fetchall()

@@ -5,13 +5,6 @@
 import pymysql
 from outAndIn import get_mysql_con, get_redis_db, get_redis_allhash, in_redis_hash
 
-# sel_config = {'host': 'etl1.innotree.org',
-#               'port': 3308,
-#               'user': 'spider',
-#               'password': 'spider',
-#               'db': 'dimension_result',
-#               'charset': 'utf8',
-#               'cursorclass': pymysql.cursors.DictCursor}
 sel_config = {'host': '47.95.31.183',
               'port': 3306,
               'user': 'test',
@@ -73,6 +66,7 @@ id_cha_list = list(set(id_name.keys()) - set(result_dict.keys()))
 
 # 将这部分数据放入 redis
 value_list = [[id, id_name[id]] for id in id_cha_list]
+print(value_list[0])
 start = 0
 for result in value_list:
 	start += 1
