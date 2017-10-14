@@ -22,26 +22,35 @@ def isRegister(_oneid):
 
 
 def insert_redis():
+	in_config = {'host': '47.95.31.183',
+	             'port': 3306,
+	             'user': 'test',
+	             'password': '123456',
+	             'charset': 'utf8',
+	             'cursorclass': pymysql.cursors.DictCursor}
+	# 取出公司名字
+	mysql1 = get_mysql_con(config=in_config)
+	mysql1.select_db(db='innotree_data')
+	cur1 = mysql1.cursor()
+
 	sql_config = {'host': 'etl1.innotree.org',
 	              'port': 3308,
 	              'user': 'spider',
 	              'password': 'spider',
-	              # 'db': 'dimension_result',
 	              'charset': 'utf8',
 	              'cursorclass': pymysql.cursors.DictCursor}
-	mysql1 = get_mysql_con(config=sql_config)
-	mysql1.select_db(db='dw_dim_online')
-	cur1 = mysql1.cursor()
-
+	# 通过名字 查找 id
 	mysql2 = get_mysql_con(config=sql_config)
 	mysql2.select_db(db='dimension_sum')
 	cur2 = mysql2.cursor()
 	try:
-		sql1 = """select company_full_name, data_from from company_bulu_it"""
+		# sql1 = """select company_full_name, data_from from company_bulu_it"""
+		sql1 = """select * from old_to_new where new_comp_id is null;"""
 		cur1.execute(sql1)
 		results1 = cur1.fetchall()
 		print(results1[0])
-		result1_list = [res['company_full_name'] for res in results1 if not res['data_from']]
+		# result1_list = [res['company_full_name'] for res in results1 if not res['data_from']]
+		result1_list = [res['comp_full_name'] for res in results1]
 		n = []
 		start = 0
 		for m in result1_list:
@@ -57,7 +66,7 @@ def insert_redis():
 					start += 1
 					print(start)
 					if isRegister(result['only_id']):
-						in_redis_hash(redis_db, '10w_only_id', result['only_id'], result['be_company_name'])
+						in_redis_hash(redis_db, '19ge_only_id', result['only_id'], result['be_company_name'])
 
 				n.clear()
 			else:
@@ -73,7 +82,7 @@ def insert_redis():
 			start += 1
 			print(start)
 			if isRegister(result['only_id']):
-				in_redis_hash(redis_db, '10w_only_id', result['only_id'], result['be_company_name'])
+				in_redis_hash(redis_db, '19ge_only_id', result['only_id'], result['be_company_name'])
 
 	except:
 		traceback.print_exc()

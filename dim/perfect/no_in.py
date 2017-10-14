@@ -46,8 +46,8 @@ id_name = {k.decode('utf-8'): v.decode('utf-8') for k, v in id_names.items()}
 print(type(id_name))
 
 # 取两个的差集（redis - company_base_info）
-cha_list = list(set(id_name.keys()) ^ set(result_dict.keys()))
-print(cha_list[:3])
+id_cha_list = list(set(id_name.keys()) ^ set(result_dict.keys()))
+print(id_cha_list[:3])
 # chas = [{'comp_id': cha, 'comp_full_name': id_name[cha]} for cha in cha_list]
 # cha_dict = {cha: id_name[cha] for cha in cha_list}
 
@@ -55,7 +55,7 @@ print(cha_list[:3])
 
 # 将这部分差集放入mysql
 in_sql = """insert into company_base_info_nohave (comp_id, comp_full_name) VALUES (%s, %s)"""
-value_list = [[cha, id_name[cha]] for cha in cha_list]
+value_list = [[id, id_name[id]] for id in id_cha_list]
 print(value_list[0])
 cur.executemany(in_sql, args=value_list)
 con.commit()

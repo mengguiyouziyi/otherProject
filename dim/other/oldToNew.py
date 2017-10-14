@@ -1,4 +1,5 @@
 """
+jsp文件中老的id换成新的id
 说明：
 1、读取文件，获取旧的 id 和 short
 2、用 id - comp_id 查找 innotree_data.company_base_info 中的 comp_full_name
@@ -50,15 +51,15 @@ for path in paths:
 # 在老表中查找其中的全称
 id_list = [f[0] for f in id_short_list]
 print(id_list)
-sql_1 = """select comp_id, comp_full_name from company_base_info WHERE comp_id in {}""".format(str(tuple(id_list)))
+sql_1 = """select comp_id, comp_full_name, comp_source from company_base_info WHERE comp_id in {}""".format(str(tuple(id_list)))
 cursor.execute(sql_1)
 r1 = cursor.fetchall()
 print(r1)
 
-# id_1_list = [r['comp_id'] for r in r1]
+# id_1_list = [r['comp_id'] for r in r1 if r['comp_source'] != 4]
 # up_sql_1 = """update old_to_new set comp_full_name = %s WHERE old_comp_id = %s"""
 # print(up_sql_1)
-# values_1_list = [(r['comp_full_name'], r['comp_id']) for r in r1]
+# values_1_list = [(r['comp_full_name'], r['comp_id']) for r in r1 if r['comp_source'] != 4]
 # print(values_1_list)
 # cursor.executemany(up_sql_1, values_1_list)
 # mysql.commit()
