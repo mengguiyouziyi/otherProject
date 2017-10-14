@@ -109,7 +109,7 @@ def _sqlObj1(db):
 def main(*args):
 	columns_list = args[0].split(',')
 	num = len(columns_list)
-	start = i = 0
+	start = i = 8228753
 	while True:
 		results = selectFun(args[0], args[1], start, 500000, db=args[2])
 		if not results:

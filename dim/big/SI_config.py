@@ -17,16 +17,7 @@ sel_inser_list = [
 	#  'inser_columns': '(comp_full_name,s_id,logo,company_abbreviation,company_eng_abbreviation,web,establishment_time,capital_type,organization_form,VC,managed_capital,registered_area,corporate_headquarters,keep_on_record,registration_number,describe,filing_time,p_id)'},
 
 
-
-	# 新实例增量
-	# base
-	# tianyancha.tyc_jichu_quan   7976988
-	# {'sel_columns': 'quan_cheng, tongyi_xinyong, qiye_leixing, fa_ren, zhuce_ziben, zhuce_shijian, dengji_jiguan, yingye_nianxian, jingying_zhuangtai, hezhun_riqi, jingying_fanwei',
-	# 'sel_table': 'tyc_jichu_quan', 'db': 'tianyancha',
-	# 'inser_table': 'comp_base_tyc',
-	# 'inser_columns': '(comp_full_name, CreditCode, EconKind, LegalPerson, RegistCapi, CreateTime, BelongOrg, BusinessLife, RegistStatus, CheckDate, BusinessScope)'},
-
-	# base 补全
+# base 补全
 	# tyc.tyc_jichu_quan
 	# {'sel_columns': 'quan_cheng, zuzhijigou_daima, nashui_shibie, gongshang_hao',
 	# 'sel_table': 'tyc_jichu_quan', 'db': 'tyc',
@@ -34,13 +25,21 @@ sel_inser_list = [
 	# 'inser_columns': '(comp_full_name, zuzhijigou_daima, nashui_shibie, gongshang_hao)'},
 
 
+	# 新实例增量
+	# base
+	# tianyancha.tyc_jichu_quan   8228753
+	{'sel_columns': 'quan_cheng, tongyi_xinyong, qiye_leixing, fa_ren, zhuce_ziben, zhuce_shijian, dengji_jiguan, yingye_nianxian, jingying_zhuangtai, hezhun_riqi, jingying_fanwei',
+	'sel_table': 'tyc_jichu_quan', 'db': 'tianyancha',
+	'inser_table': 'comp_base_tyc',
+	'inser_columns': '(comp_full_name, CreditCode, EconKind, LegalPerson, RegistCapi, CreateTime, BelongOrg, BusinessLife, RegistStatus, CheckDate, BusinessScope)'},
+
 	# website
-	# tianyancha.tyc_jichu_quan 7976622
+	# tianyancha.tyc_jichu_quan 8228753
 	# {'sel_columns': 'quan_cheng, w_eb', 'sel_table': 'tyc_jichu_quan', 'db': 'tianyancha',
 	#  'inser_table': 'comp_web_tyc', 'inser_columns': '(comp_full_name, web_url)'},
 
 	# logo
-	# tianyancha.tyc_jichu_quan 7976622
+	# tianyancha.tyc_jichu_quan 8228753
 	# {'sel_columns': 'quan_cheng, logo', 'sel_table': 'tyc_jichu_quan', 'db': 'tianyancha',
 	#  'inser_table': 'comp_logo_tyc', 'inser_columns': '(comp_full_name, logo_url)'},
 
@@ -60,9 +59,9 @@ sel_inser_list = [
 	#  'inser_table': 'comp_contactinfo_tyc', 'inser_columns': '(comp_full_name, phone, email)'},
 
 	# intro
-	# tianyancha.tyc_jichu_quan
-	{'sel_columns': 'quan_cheng, c_desc', 'sel_table': 'tyc_jichu_quan', 'db': 'tianyancha',
-	 'inser_table': 'comp_intro_tyc', 'inser_columns': '(comp_full_name, intro)'},
+	# tianyancha.tyc_jichu_quan  8230939
+	# {'sel_columns': 'quan_cheng, c_desc', 'sel_table': 'tyc_jichu_quan', 'db': 'tianyancha',
+	#  'inser_table': 'comp_intro_tyc', 'inser_columns': '(comp_full_name, intro)'},
 
 
 
