@@ -99,7 +99,7 @@ def a(i):
 	in_con.commit()
 
 try:
-	for i in range(10):
+	for i in range([0,1,2,5,6,9]):
 		a(i)
 finally:
 	sel_con.close()
