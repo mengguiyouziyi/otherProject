@@ -68,8 +68,8 @@ def insert_redis():
 				for result in results2:
 					start += 1
 					print(start)
-					if isRegister(result['only_id']):
-						in_redis_hash(redis_db, '19ge_only_id', result['only_id'], result['be_company_name'])
+					# if isRegister(result['only_id']):
+					in_redis_hash(redis_db, '19ge_only_id_aa', result['only_id'], result['be_company_name'])
 
 				n.clear()
 			else:
@@ -84,8 +84,8 @@ def insert_redis():
 		for result in results2:
 			start += 1
 			print(start)
-			if isRegister(result['only_id']):
-				in_redis_hash(redis_db, '19ge_only_id', result['only_id'], result['be_company_name'])
+			# if isRegister(result['only_id']):
+			in_redis_hash(redis_db, '19ge_only_id_aa', result['only_id'], result['be_company_name'])
 
 	except:
 		traceback.print_exc()
