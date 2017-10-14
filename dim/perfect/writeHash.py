@@ -1,3 +1,7 @@
+"""
+将需要增补为线上数据的公司，放入redis中
+"""
+
 import pymysql
 from outAndIn import get_redis_db, in_redis_hash, get_mysql_con, sel_fun
 
@@ -5,7 +9,7 @@ sql_config = {'host': '47.95.31.183',
               'port': 3306,
               'user': 'test',
               'password': '123456',
-              'db': 'innotree_data',
+              'db': 'innotree_data_online',
               'charset': 'utf8',
               'cursorclass': pymysql.cursors.DictCursor}
 mysql = get_mysql_con(config=sql_config)
@@ -25,4 +29,4 @@ for result in results:
 	start += 1
 	print(start)
 	# if result['zhuce_or'] == 0:
-	in_redis_hash(redis_db, '9w_only_id', result['comp_id'], result['comp_full_name'])
+	in_redis_hash(redis_db, 'intro_only_id', result['comp_id'], result['comp_full_name'])

@@ -5,9 +5,37 @@
 """
 
 import pymysql
-from outAndIn import get_redis_db, get_mysql_con, get_redis_field, _handle_str
+from .outAndIn import get_redis_db, get_mysql_con, get_redis_field, _handle_str, get_col_str
 
-up_sql = """update {0} set {1} = %s, {2} = %s where comp_id = %s""".format('1', '2', '3')
+
+in_config = {'host': '47.95.31.183',
+             'port': 3306,
+             'user': 'test',
+             'password': '123456',
+             'db': 'innotree_data_online',
+             'charset': 'utf8',
+             'cursorclass': pymysql.cursors.DictCursor}
+# 创建插入sql连接和游标
+up_con = get_mysql_con(config=in_config)
+up_cur = up_con.cursor()
+# 要写成软代码不太容易啊
+cols_str = get_col_str(con=up_con, db='innotree_data_online', tab='company_base_info')
+# update的是总量表，其中的字段是涉及到相应纬度的表中字段所对应的字段
+"""
+contact: 'comp_contact': 'linkman'
+intro: 'comp_introduction': 'intro'
+regist: 'comp_reg_addr': 'regaddr'
+shortname: 'comp_short_name': 'chinese_short', 'comp_english_short': 'english_short'
+base: 
+"""
+up_sql = """update company_base_info{tab_num} set {1} = %s, {2} = %s where comp_id = %s""".format('1', '2', '3')
+
+
+
+
+
+
+
 
 col_dict = {'comp_id': 'only_id', 'comp_full_name': 'comp_full_name', 'comp_short_name': 'chinese_short',
             'comp_english_short': 'english_short', 'comp_credit_code': 'CreditCode',
