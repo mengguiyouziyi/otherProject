@@ -1,5 +1,5 @@
 """
-把
+暂时没用
 """
 import pymysql
 from outAndIn import get_redis_db, get_mysql_con, get_redis_field, _handle_str

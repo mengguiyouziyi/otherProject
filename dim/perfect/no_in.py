@@ -27,19 +27,28 @@ while True:
 	if not res:
 		break
 	sta += len(res)
-	# print(res[0])
 	results.extend(res)
-# print(results[0])
 result_dict = {result['comp_id']: result['comp_full_name'] for result in results}  # 做成id：name的全集字典
 
 # 全量取出redis中的 comp_id, comp_full_name
 redis_db = get_redis_db(host='a027.hb2.innotree.org')
 id_names = get_redis_allhash(redis_db, 'intro_all_only_id')
 id_name = {k.decode('utf-8'): v.decode('utf-8') for k, v in id_names.items()}
-# print(type(id_name))
 
 # 取两个的差集（redis - company_base_info）
 id_cha_list = list(set(id_name.keys()) - set(result_dict.keys()))
+
+# 将这部分数据放入 redis
+value_list = [[id, id_name[id]] for id in id_cha_list]
+print(value_list[0])
+start = 0
+for result in value_list:
+	start += 1
+	print(start)
+	in_redis_hash(redis_db, 'intro_no_only_id', result[0], result[1])
+
+
+
 # print(id_cha_list[:3])
 # chas = [{'comp_id': cha, 'comp_full_name': id_name[cha]} for cha in cha_list]
 # cha_dict = {cha: id_name[cha] for cha in cha_list}
@@ -64,14 +73,7 @@ id_cha_list = list(set(id_name.keys()) - set(result_dict.keys()))
 # con.commit()
 # con.close()
 
-# 将这部分数据放入 redis
-value_list = [[id, id_name[id]] for id in id_cha_list]
-print(value_list[0])
-start = 0
-for result in value_list:
-	start += 1
-	print(start)
-	in_redis_hash(redis_db, 'intro_no_only_id', result[0], result[1])
+
 
 
 

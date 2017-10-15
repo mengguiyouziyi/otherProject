@@ -7,7 +7,6 @@
 import pymysql
 from .outAndIn import get_redis_db, get_mysql_con, get_redis_field, _handle_str, get_col_str
 
-
 in_config = {'host': '47.95.31.183',
              'port': 3306,
              'user': 'test',
@@ -19,34 +18,47 @@ in_config = {'host': '47.95.31.183',
 up_con = get_mysql_con(config=in_config)
 up_cur = up_con.cursor()
 # 要写成软代码不太容易啊
-cols_str = get_col_str(con=up_con, db='innotree_data_online', tab='company_base_info')
+# cols_str = get_col_str(con=up_con, db='innotree_data_online', tab='company_base_info')
 # update的是总量表，其中的字段是涉及到相应纬度的表中字段所对应的字段
-"""
-contact: 'comp_contact': 'linkman'
-intro: 'comp_introduction': 'intro'
-regist: 'comp_reg_addr': 'regaddr'
-shortname: 'comp_short_name': 'chinese_short', 'comp_english_short': 'english_short'
-base: 
-"""
-up_sql = """update company_base_info{tab_num} set {1} = %s, {2} = %s where comp_id = %s""".format('1', '2', '3')
+con_up_sql = """update company_base_info_all{tab_num} set comp_phone = %s, comp_email = %s, comp_fax = %s, comp_contact = %s where comp_id = %s""".format()
+int_up_sql = """update company_base_info_all{tab_num} set comp_introduction = %s where comp_id = %s""".format()
+reg_up_sql = """update company_base_info_all{tab_num} set comp_reg_addr = %s where comp_id = %s""".format()
+sho_up_sql = """update company_base_info_all{tab_num} set comp_short_name = %s, comp_english_short = %s where comp_id = %s""".format()
+web_up_sql = """update company_base_info_all set comp_web_url = %s where comp_id = %s"""
+log_up_sql = """update company_base_info_all set comp_logo_tmp = %s where comp_id = %s"""
+bas_up_sql = """update company_base_info_all{tab_num} set 
+		comp_full_name = %s, comp_credit_code = %s,
+		comp_type = %s, comp_corporation = %s, 
+		comp_reg_captital = %s, comp_create_date = %s, 
+		comp_reg_authority = %s, comp_bus_duration = %s, 
+		comp_issue_date = %s, comp_reg_status = %s, 
+		comp_provice = %s, comp_city = %s, 
+		comp_district = %s, comp_bus_range = %s, 
+		comp_org_type = %s where comp_id = %s""".format()
+
+
+values_list = []
+up_cur.executemany(bas_up_sql, values_list)
 
 
 
+col_dict = {'comp_id': 'only_id',
+            'comp_full_name': 'comp_full_name', 'comp_credit_code': 'CreditCode',
+            'comp_type': 'EconKind', 'comp_corporation': 'LegalPerson',
+            'comp_reg_captital': 'RegistCapi', 'comp_create_date': 'CreateTime',
+            'comp_reg_authority': 'BelongOrg', 'comp_bus_duration': 'BusinessLife',
+            'comp_issue_date': 'CheckDate', 'comp_reg_status': 'RegistStatus',
+            'comp_provice': 'province', 'comp_city': 'city',
+            'comp_district': 'district', 'comp_bus_range': 'BusinessScope',
+            'comp_org_type': 'OrgType',
 
-
-
-
-
-col_dict = {'comp_id': 'only_id', 'comp_full_name': 'comp_full_name', 'comp_short_name': 'chinese_short',
-            'comp_english_short': 'english_short', 'comp_credit_code': 'CreditCode',
-            'comp_type': 'EconKind', 'comp_corporation': 'LegalPerson', 'comp_reg_captital': 'RegistCapi',
-            'comp_create_date': 'CreateTime', 'comp_reg_authority': 'BelongOrg',
-            'comp_bus_duration': 'BusinessLife',
-            'comp_issue_date': 'CheckDate', 'comp_reg_status': 'RegistStatus', 'comp_provice': 'province',
-            'comp_city': 'city', 'comp_district': 'district', 'comp_reg_addr': 'regaddr', 'comp_web_url': 'web_url',
-            'comp_logo_tmp': 'logo_url', 'comp_phone': 'phone', 'comp_email': 'email',
-            'comp_bus_range': 'BusinessScope', 'comp_introduction': 'intro', 'comp_org_type': 'OrgType',
-            'comp_fax': 'fax', 'comp_contact': 'linkman'}
+            'comp_short_name': 'chinese_short', 'comp_english_short': 'english_short',  # 简称
+            'comp_reg_addr': 'regaddr',  # 注册地址
+            'comp_web_url': 'web_url',  # 官网
+            'comp_logo_tmp': 'logo_url',  # logo
+            'comp_phone': 'phone', 'comp_email': 'email', 'comp_fax': 'fax', 'comp_contact': 'linkman',  # 联系方式
+            'comp_introduction': 'intro',  # 简介
+            }
 
 in_cols = col_dict.keys()  # 插入字段
 in_col_str = '(' + ','.join(in_cols) + ')'  # 构建sql语句中的插入字段
@@ -79,6 +91,7 @@ olss = [[only_id.decode('utf-8') for only_id in only_ids if only_id.decode('utf-
         range(0, 10)]
 table_list = ['comp_contactinfo_result', 'comp_intro_result', 'comp_registaddr_result',
               'comp_shortname_result', 'comp_base_result']
+
 
 def a(i):
 	ols = olss[i]
@@ -129,9 +142,41 @@ def a(i):
 	in_cur.executemany(in_sql, values)
 	in_con.commit()
 
+
 try:
 	for i in range(10):
 		a(i)
 finally:
 	sel_con.close()
 	in_con.close()
+
+
+
+
+
+
+
+
+
+# col_dict = {'comp_id': 'only_id', 'comp_full_name': 'comp_full_name',
+#             'comp_short_name': 'chinese_short', 'comp_english_short': 'english_short',  # 简称
+#
+#             'comp_credit_code': 'CreditCode', 'comp_type': 'EconKind', 'comp_corporation': 'LegalPerson',
+#             'comp_reg_captital': 'RegistCapi', 'comp_create_date': 'CreateTime',
+#             'comp_reg_authority': 'BelongOrg', 'comp_bus_duration': 'BusinessLife',
+#             'comp_issue_date': 'CheckDate', 'comp_reg_status': 'RegistStatus', 'comp_provice': 'province',
+#             'comp_city': 'city', 'comp_district': 'district',
+#
+#             'comp_reg_addr': 'regaddr',  # 注册地址
+#             'comp_web_url': 'web_url',  # 官网
+#             'comp_logo_tmp': 'logo_url',  # logo
+#             'comp_phone': 'phone', 'comp_email': 'email',  # 联系方式
+#
+#             'comp_bus_range': 'BusinessScope',
+#
+#             'comp_introduction': 'intro',  # 简介
+#
+#             'comp_org_type': 'OrgType',
+#
+#             'comp_fax': 'fax', 'comp_contact': 'linkman'  # 联系方式
+#             }
