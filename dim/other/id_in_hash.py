@@ -5,14 +5,6 @@
 2、dimension_sum.com_dictionaries 用 only_id 搜索 name
 3、放入redis 2622_only_id 中
 """
-import os
-import sys
-
-f = os.path.abspath(os.path.dirname(__file__))
-ff = os.path.dirname(f)
-fff = os.path.dirname(ff)
-sys.path.extend([f, ff, fff])
-
 import pymysql
 # import redis
 import traceback
