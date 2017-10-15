@@ -42,16 +42,19 @@ in_con = get_mysql_con(config=in_config)
 in_cur = in_con.cursor()
 # 创建redis连接并获取所有only_id
 redis_db = get_redis_db(host='a027.hb2.innotree.org')
-
-only_ids = get_redis_field(redis_db, 'tag_only_id')
-
-# olss = [[110, 120, 130, ....], [111, 121, 131], [112, 122, 132], ......]
-olss = [[only_id.decode('utf-8') for only_id in only_ids if only_id.decode('utf-8').endswith(str(i))] for i in
-        range(0, 10)]
 table_list = ['comp_contactinfo_result', 'comp_intro_result', 'comp_registaddr_result',
               'comp_shortname_result', 'comp_base_result']
 
-def a(i):
+
+def get_ids(re_key):
+	only_ids = get_redis_field(redis_db, re_key)
+	# olss = [[110, 120, 130, ....], [111, 121, 131], [112, 122, 132], ......]
+	olss = [[only_id.decode('utf-8') for only_id in only_ids if only_id.decode('utf-8').endswith(str(i))] for i in
+	        range(0, 10)]
+	return olss
+
+
+def a(olss, i):
 	ols = olss[i]
 	in_sql = """insert into company_base_info_copy{num} {in_col} VALUES ({ss})""".format(num=i, in_col=in_col_str,
 	                                                                                     ss=_handle_str(len(col_dict)))
@@ -100,9 +103,13 @@ def a(i):
 	in_cur.executemany(in_sql, values)
 	in_con.commit()
 
-try:
-	# for i in [0,1,5,6,9,2]:
-	a(1)
-finally:
-	sel_con.close()
-	in_con.close()
+
+
+if __name__ == '__main__':
+	olss = get_ids("bu36_only_id")
+	try:
+		for i in range(10):
+			a(olss, i)
+	finally:
+		sel_con.close()
+		in_con.close()
