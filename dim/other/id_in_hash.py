@@ -8,9 +8,10 @@
 import os
 import sys
 
-fa = os.path.abspath(os.path.dirname(__file__))
-fa_fa = os.path.dirname(fa)
-sys.path.extend([fa, fa_fa])
+f = os.path.abspath(os.path.dirname(__file__))
+ff = os.path.dirname(f)
+fff = os.path.dirname(ff)
+sys.path.extend([f, ff, fff])
 
 import pymysql
 # import redis
