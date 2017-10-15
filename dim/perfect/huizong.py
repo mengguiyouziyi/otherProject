@@ -111,11 +111,10 @@ def a(olss, i):
 	in_con.commit()
 
 
-
 if __name__ == '__main__':
 	olss = get_ids("buchong_id_only_id")
 	try:
-		for i in range(5, 10):
+		for i in range(5):
 			a(olss, i)
 	finally:
 		sel_con.close()
