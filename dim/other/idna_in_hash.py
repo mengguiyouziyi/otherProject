@@ -16,29 +16,6 @@ def isRegister(_oneid):
 	r = redis.Redis(host='10.44.51.90', port=6379, db=0)
 	return r.sismember(name="zhuce", value=_oneid)
 
-
-sel_config = {'host': 'etl1.innotree.org',
-              'port': 3308,
-              'user': 'spider',
-              'password': 'spider',
-              'db': 'dimension_result',
-              'charset': 'utf8',
-              'cursorclass': pymysql.cursors.DictCursor}
-sel_mysql = pymysql.connect(**sel_config)
-sel_cur = sel_mysql.cursor()
-sta = 0
-for n in range(10):
-	while True:
-		all_sql = """select only_id, comp_full_name from comp_base_result{num} limit {sta}, 500000""".format(num=n,
-		                                                                                                     sta=sta)
-		sel_cur.execute(all_sql)
-		rs = sel_cur.fetchall()
-
-
-
-
-
-
 sql_config = {'host': '47.95.31.183',
               'port': 3306,
               'user': 'test',
@@ -50,6 +27,7 @@ sql_config = {'host': '47.95.31.183',
 mysql = get_mysql_con(config=sql_config)
 cur = mysql.cursor()
 
+# 全量读取 company_base_info 中 comp_id, comp_full_name
 results = []
 sta = 0
 while True:

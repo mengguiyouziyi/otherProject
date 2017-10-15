@@ -28,28 +28,36 @@ def write_data():
 
 	dir_path = "/Users/menggui/Desktop/newchain/"
 	dir_path2 = "/Users/menggui/Desktop/newchain2/"
-	paths = [os.path.join(dir_path, f) for f in os.listdir(dir_path)]
-	path2s = [os.path.join(dir_path2, f) for f in os.listdir(dir_path2)]
+	paths = [os.path.join(dir_path, f) for f in os.listdir(dir_path) if not f.startswith('.')]
+	path2s = [os.path.join(dir_path2, f) for f in os.listdir(dir_path2) if not f.startswith('.')]
 
 	numb = 0
 	for path, path2 in zip(paths, path2s):
+
 		with open(path, 'r') as f:
 			x = f.read()
 			co = re.compile(
 				r'\<a href="/inno/company/(\d+?)\.html" target="view_window" class="in_se_a03"\>(.+?)\</a\>')
 			se = re.findall(co, x)
+			if len(se) == 0:
+				continue
+			print(path, path2)
+
 			sth = results[numb: numb + len(se)]
 			for i in range(len(se)):
-				if sth[i]['new_comp_short_name']:
-					sth[i]['new_comp_short_name'] = sth[i]['new_comp_short_name'].strip()
 				e_co = re.compile(
 					r'\<a href="/inno/company/{0}\.html" target="view_window" class="in_se_a03"\>{1}\</a\>'.format(
 						sth[i]['old_comp_id'], sth[i]['old_comp_short_name']))
-				repl = '<a href="/inno/company/{0}.html" target="view_window" class="in_se_a03">{1}</a>'.format(
-					sth[i]['new_comp_id'], sth[i]['new_comp_short_name'])
+				if sth[i]['new_comp_short_name']:
+					sth[i]['new_comp_short_name'] = sth[i]['new_comp_short_name'].strip()
+					repl = '<a href="/inno/company/{0}.html" target="view_window" class="in_se_a03">{1}</a>'.format(
+						sth[i]['new_comp_id'], sth[i]['new_comp_short_name'])
+				else:
+					repl = '<!--<a href="/inno/company/{0}.html" target="view_window" class="in_se_a03">{1}</a>-->'.format(
+						sth[i]['old_comp_id'], sth[i]['old_comp_short_name'])
 				x = re.sub(e_co, repl, x)
+
 			numb += len(se)
-			print(x)
 			with open(path2, 'w+') as f2:
 				f2.write(x)
 

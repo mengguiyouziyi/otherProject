@@ -2,6 +2,8 @@
 总量汇总，两种模式：
 1、搜各个表，在内存中update dict
 2、先insert id和name，再搜各个表，用sql语句update相应表的字段
+第二种的步骤：
+
 """
 
 import pymysql
