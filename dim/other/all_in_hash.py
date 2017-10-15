@@ -33,7 +33,7 @@ for n in range(10):
 		if not results:
 			break
 		for result in results:
-			comp_id = result['comp_id']
+			comp_id = result['only_id']
 			comp_full_name = result['comp_full_name']
 			in_redis_hash(redis_db, 'id_name_all', comp_id, comp_full_name)
 			in_redis_hash(redis_db, 'name_id_all', comp_full_name, comp_id)
