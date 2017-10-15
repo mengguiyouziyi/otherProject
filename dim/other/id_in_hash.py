@@ -8,7 +8,7 @@
 import pymysql
 # import redis
 import traceback
-from dim.utility.tools import get_redis_db, in_redis_hash
+from ..utility.tools import get_redis_db, in_redis_hash
 
 
 # def isRegister(_oneid):
