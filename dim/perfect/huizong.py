@@ -113,9 +113,9 @@ def a(olss, i):
 
 
 if __name__ == '__main__':
-	olss = get_ids("bu36_only_id")
+	olss = get_ids("buchong_id_only_id")
 	try:
-		for i in range(10):
+		for i in range(5):
 			a(olss, i)
 	finally:
 		sel_con.close()
