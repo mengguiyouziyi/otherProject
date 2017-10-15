@@ -33,6 +33,8 @@ for n in range(10):
 		                                                                                                     sta=sta)
 		sel_cur.execute(all_sql)
 		rs = sel_cur.fetchall()
+		if not rs:
+			break
 
 
 

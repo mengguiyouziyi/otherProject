@@ -135,5 +135,5 @@ if __name__ == '__main__':
 	              'db': 'dimension_sum',
 	              'charset': 'utf8',
 	              'cursorclass': pymysql.cursors.DictCursor}
-	in_redis_id(etl_config, 'bu36_id', 'comp_id', 'bu36_only_id')
+	in_redis_id(etl_config, 'buchong_id', 'comp_id', 'buchong_id_only_id')
 	# pass
