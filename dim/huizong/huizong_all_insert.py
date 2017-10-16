@@ -103,12 +103,12 @@ def together(oo, i):
 		values.append(value)
 		if len(values) == 3000:
 			online_cur.executemany(in_sql, values)
-			online_cur.commit()
+			online.commit()
 			values.clear()
 		else:
 			continue
 	online_cur.executemany(in_sql, values)
-	online_cur.commit()
+	online.commit()
 
 
 if __name__ == '__main__':
