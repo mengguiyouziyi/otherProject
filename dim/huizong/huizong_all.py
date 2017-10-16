@@ -7,7 +7,7 @@
 """
 
 import pymysql
-from .outAndIn import get_redis_db, get_mysql_con, get_redis_field, _handle_str, get_col_str
+from dim.perfect.outAndIn import get_redis_db, get_mysql_con, get_redis_field, _handle_str, get_col_str
 
 in_config = {'host': '47.95.31.183',
              'port': 3306,
