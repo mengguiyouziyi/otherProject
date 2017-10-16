@@ -10,6 +10,7 @@ fff = os.path.dirname(ff)
 sys.path.extend([f, ff, fff])
 
 import pymysql
+from math import ceil
 from dim.utility.tools import get_redis_db, get_mysql_con, get_redis_field, _handle_str
 
 col_dict = {'comp_id': 'only_id', 'comp_full_name': 'comp_full_name', 'comp_short_name': 'chinese_short',
@@ -71,6 +72,10 @@ def together(ols, i):
 		a = result_mo.copy()
 		result_mo_dict[only_id] = a
 
+
+	ol_list = [ols[s: s+100000] for s in range(len(ols/100000))]
+	for j in range(ceil(len(ols)/100000)):
+		pass
 	for table in tables:
 		sel_sql = """select * from {tab} WHERE only_id in {ids}""".format(tab=table, ids=str(tuple(ols)))
 		sel_cur.execute(sel_sql)

@@ -12,12 +12,6 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 path = os.path.abspath(os.path.dirname(__file__))
 sys.path.append(path)
 
-logger = logging.getLogger(__name__)
-ch = logging.StreamHandler()
-ch.setLevel(logging.DEBUG)
-formatter = logging.Formatter('%(asctime)s %(name)s- %(levelname)s - %(message)s')
-ch.setFormatter(formatter)
-logger.addHandler(ch)
 
 QUEUE_REDIS_HOST = '10.44.152.49'
 QUEUE_REDIS_PORT = 6379
@@ -111,8 +105,9 @@ def main(table_get, table_in):
 	while True:
 		results = selectFun(sel_con, table_get, start=start)
 		if not results:
-			time.sleep(300)
-			continue
+			# time.sleep(300)
+			# continue
+			break
 		start += len(results)
 		value_list = []
 		for result in results:

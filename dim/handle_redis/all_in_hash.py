@@ -25,6 +25,26 @@ sel_mysql = pymysql.connect(**sel_config)
 sel_cur = sel_mysql.cursor()
 
 
+def in_redis_all_tycid():
+	"""
+	将全量天眼查id入到redis总量key中
+	:return:
+	"""
+	sta = 0
+	while True:
+		all_sql = """select t_id, quan_cheng from tyc_jichu_quan limit {sta}, 500000""".format(nsta=sta)
+		sel_cur.execute(all_sql)
+		results = sel_cur.fetchall()
+		if not results:
+			break
+		for result in results:
+			comp_id = result['t_id']
+			comp_full_name = result['quan_cheng']
+			in_redis_hash(redis_db, 'tycid_name_all', comp_id, comp_full_name)
+		sta += len(results)
+		print(sta)
+
+
 def in_redis_all():
 	"""
 	将全量id入到redis总量key中

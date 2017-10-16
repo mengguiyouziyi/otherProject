@@ -128,12 +128,11 @@ def in_redis_id(conf, tab, col, re_key):
 
 
 if __name__ == '__main__':
-	etl_config = {'host': 'etl1.innotree.org',
-	              'port': 3308,
-	              'user': 'spider',
-	              'password': 'spider',
-	              'db': 'dimension_sum',
-	              'charset': 'utf8',
-	              'cursorclass': pymysql.cursors.DictCursor}
-	in_redis_id(etl_config, 'buchong_id', 'comp_id', 'buchong_id_only_id')
-	# pass
+	online_config = {'host': '47.95.31.183',
+	                 'port': 3306,
+	                 'user': 'test',
+	                 'password': '123456',
+	                 'db': 'innotree_data_online',
+	                 'charset': 'utf8',
+	                 'cursorclass': pymysql.cursors.DictCursor}
+	in_redis_id(online_config, 'comp_gaoxin', 'comp_id', 'comp_gaoxin_only_id')
