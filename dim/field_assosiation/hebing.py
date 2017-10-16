@@ -99,7 +99,7 @@ def main(table_get, table_in):
 	sel_con = _sqlObj1('tianyancha')
 	# 用于插入的mysql连接
 	in_con = _sqlObj('spider_dim')
-	# in_col = _get_column(in_con, table_in)
+	in_col = _get_column(in_con, table_in)
 
 	start = i = 13218691
 	while True:
@@ -117,9 +117,9 @@ def main(table_get, table_in):
 			# comp_full_name = _get_redis(result['t_id'])
 			# result['comp_full_name'] = comp_full_name if comp_full_name else ''
 			result['comp_full_name'] = ''
-			# columns_list = in_col.split(',')
-			# values = [result[column] for column in columns_list]
-			values = [result['comp_full_name'], result['t_id'], result['m_name'], result['m_position'], '', '', result['logo_url'], '', '', result['m_experience']]
+			columns_list = in_col.split(',')
+			values = [result[column] for column in columns_list]
+			# values = [result['comp_full_name'], result['t_id'], result['m_name'], result['m_position'], '', '', result['logo_url'], '', '', result['m_experience']]
 			value_list.append(values)
 			if len(value_list) == 50000:
 				insertManyFun(in_con, table_in, value_list)
