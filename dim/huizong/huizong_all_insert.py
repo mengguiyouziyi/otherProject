@@ -3,15 +3,16 @@
 """
 import os
 import sys
+f = os.path.abspath(os.path.dirname(__file__))
+ff = os.path.dirname(f)
+fff = os.path.dirname(ff)
+sys.path.extend([f, ff, fff])
 import pymysql
 from math import ceil
 from dim.utility.tools import get_redis_db, get_mysql_con, get_redis_field, _handle_str
 from dim.utility.info import a024, a027, etl_config, xin_config, online_config
 
-f = os.path.abspath(os.path.dirname(__file__))
-ff = os.path.dirname(f)
-fff = os.path.dirname(ff)
-sys.path.extend([f, ff, fff])
+
 
 col_dict = {'comp_id': 'only_id', 'comp_full_name': 'comp_full_name', 'comp_short_name': 'chinese_short',
             'comp_english_short': 'english_short', 'comp_credit_code': 'CreditCode',
