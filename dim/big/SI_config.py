@@ -35,13 +35,13 @@ sel_inser_list = [
 
 	# website
 	# tianyancha.tyc_jichu_quan 8228753
-	{'sel_columns': 'quan_cheng, w_eb', 'sel_table': 'tyc_jichu_quan', 'db': 'tianyancha',
-	 'inser_table': 'comp_web_tyc', 'inser_columns': '(comp_full_name, web_url)'},
+	# {'sel_columns': 'quan_cheng, w_eb', 'sel_table': 'tyc_jichu_quan', 'db': 'tianyancha',
+	#  'inser_table': 'comp_web_tyc', 'inser_columns': '(comp_full_name, web_url)'},
 
 	# logo
 	# tianyancha.tyc_jichu_quan 8228753
-	# {'sel_columns': 'quan_cheng, logo', 'sel_table': 'tyc_jichu_quan', 'db': 'tianyancha',
-	#  'inser_table': 'comp_logo_tyc', 'inser_columns': '(comp_full_name, logo_url)'},
+	{'sel_columns': 'quan_cheng, logo', 'sel_table': 'tyc_jichu_quan', 'db': 'tianyancha',
+	 'inser_table': 'comp_logo_tyc', 'inser_columns': '(comp_full_name, logo_url)'},
 
 	# registaddr
 	# tyc.tyc_jichu_quan
