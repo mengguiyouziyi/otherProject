@@ -23,7 +23,7 @@ a027_db = get_redis_db(a027)
 # a024_db = get_redis_db(a024)
 
 etl = pymysql.connect(**etl_config)
-etl.select_db('tyc')
+etl.select_db('dimension_sum')
 etl_cur = etl.cursor()
 
 
