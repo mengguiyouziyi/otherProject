@@ -48,7 +48,7 @@ def in_redis_all_tycid(cur, tab, sta=0):
 		for result in results:
 			t_id = result['t_id']
 			quan_cheng = result['quan_cheng']
-			in_redis_hash(a027_db, 'tid_name_all', t_id, quan_cheng)
+			in_redis_hash(a027_db, 't_id_name_all', t_id, quan_cheng)
 		sta += len(results)
 		print(sta)
 
