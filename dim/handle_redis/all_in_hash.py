@@ -21,6 +21,7 @@ etl = pymysql.connect(**etl_config)
 etl.select_db('tyc')
 etl_cur = etl.cursor()
 
+
 # xin = pymysql.connect(**xin_config)
 # xin.select_db('tianyancha')
 # xin_cur = xin.cursor()
@@ -28,26 +29,6 @@ etl_cur = etl.cursor()
 # online = pymysql.connect(**online_config)
 # online.select_db('innotree_data_online')
 # online_cur = online.cursor()
-
-
-# def in_redis_all_tycid():
-# 	"""
-# 	将全量天眼查id入到redis总量key中
-# 	:return:
-# 	"""
-# 	sta = 0
-# 	while True:
-# 		all_sql = """select t_id, quan_cheng from tyc_jichu_quan limit {sta}, 500000""".format(nsta=sta)
-# 		sel_cur.execute(all_sql)
-# 		results = sel_cur.fetchall()
-# 		if not results:
-# 			break
-# 		for result in results:
-# 			t_id = result['t_id']
-# 			quan_cheng = result['quan_cheng']
-# 			in_redis_string(redis_db, t_id, quan_cheng)
-# 		sta += len(results)
-# 		print(sta)
 
 
 def in_redis_all():
