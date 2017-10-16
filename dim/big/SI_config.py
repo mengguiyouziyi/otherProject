@@ -45,8 +45,8 @@ sel_inser_list = [
 
 	# registaddr
 	# tyc.tyc_jichu_quan
-	# {'sel_columns': 'quan_cheng, zhuce_dizhi', 'sel_table': 'tyc_jichu_quan', 'db': 'tianyancha',
-	#  'inser_table': 'comp_registaddr_tyc', 'inser_columns': '(comp_full_name, regaddr)'},
+	{'sel_columns': 'quan_cheng, zhuce_dizhi', 'sel_table': 'tyc_jichu_quan', 'db': 'tianyancha',
+	 'inser_table': 'comp_registaddr_tyc', 'inser_columns': '(comp_full_name, regaddr)'},
 
 	# office
 	# tianyancha.tyc_jichu_quan
@@ -60,8 +60,8 @@ sel_inser_list = [
 
 	# intro
 	# tianyancha.tyc_jichu_quan  8230939
-	{'sel_columns': 'quan_cheng, c_desc', 'sel_table': 'tyc_jichu_quan', 'db': 'tianyancha',
-	 'inser_table': 'comp_intro_tyc', 'inser_columns': '(comp_full_name, intro)'},
+	# {'sel_columns': 'quan_cheng, c_desc', 'sel_table': 'tyc_jichu_quan', 'db': 'tianyancha',
+	#  'inser_table': 'comp_intro_tyc', 'inser_columns': '(comp_full_name, intro)'},
 
 
 
