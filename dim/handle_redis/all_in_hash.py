@@ -26,6 +26,10 @@ sel_cur = sel_mysql.cursor()
 
 
 def in_redis_all():
+	"""
+	将全量id入到redis总量key中
+	:return:
+	"""
 	all_ids = 0
 	for n in range(10):
 		sta = 0
@@ -47,9 +51,34 @@ def in_redis_all():
 		print('~~~~~~~~' + str(n) + '~~~~~~~~' + str(all_ids) + '~~~~~~~~')
 
 
+def in_redis_num():
+	"""
+	按尾号将id插入redis不同key中
+	:return:
+	"""
+	all_ids = 0
+	for n in range(10):
+		re_key = 'id_name_all_{num}'.format(num=n)
+		sta = 0
+		while True:
+			all_sql = """select only_id from comp_base_result{num} limit {sta}, 500000""".format(num=n, sta=sta)
+			sel_cur.execute(all_sql)
+			results = sel_cur.fetchall()
+			if not results:
+				break
+			for result in results:
+				comp_id = result['only_id']
+				in_redis_hash(redis_db, re_key, comp_id, '')
+			sta += len(results)
+			print(sta)
+		all_ids += sta
+		print('~~~~~~~~' + str(n) + '~~~~~~~~' + str(all_ids) + '~~~~~~~~')
+
+
 if __name__ == '__main__':
 	try:
-		in_redis_all()
+		# in_redis_all()
+		in_redis_num()
 	except:
 		traceback.print_exc()
 	finally:

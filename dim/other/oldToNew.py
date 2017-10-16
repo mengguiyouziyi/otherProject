@@ -131,14 +131,5 @@ def get_data():
 	mysql.commit()
 
 
-# sql_3 = """insert into innotree_data.old_to_new (old_comp_id, old_comp_short_name, comp_full_name, new_comp_id, new_comp_short_name) VALUES (%s, %s, %s, %s, %s)"""
-# values_list = []
-# cursor.execute(sql_3, values_list)
-# mysql.commit()
-
-
-
-
-
 if __name__ == '__main__':
 	write_data()
