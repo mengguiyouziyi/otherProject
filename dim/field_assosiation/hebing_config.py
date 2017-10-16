@@ -30,7 +30,7 @@ sel_inser_list = [
 	# {'sel_table': 'jigou_teaminfo_smt', 'inser_table': 'jigou_teaminfo_smt_copy1'},
 
 	# spider_dim.tyc_core_team
-	{'sel_table': 'tyc_core_team', 'inser_table': 'comp_teaminfo_tyc'},
+	# {'sel_table': 'tyc_core_team', 'inser_table': 'comp_teaminfo_tyc'},
 ]
 ##########################################################################################
 """
