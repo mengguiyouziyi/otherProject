@@ -72,29 +72,27 @@ def together(ols, i):
 		a = result_mo.copy()
 		result_mo_dict[only_id] = a
 
-
-	ol_list = [ols[s: s+100000] for s in range(len(ols/100000))]
-	for j in range(ceil(len(ols)/100000)):
-		pass
-	for table in tables:
-		sel_sql = """select * from {tab} WHERE only_id in {ids}""".format(tab=table, ids=str(tuple(ols)))
-		sel_cur.execute(sel_sql)
-		results = sel_cur.fetchall()
-		result_x = {}
-		# 同一个纬度的所有列表
-		for result in results:
-			if not result:
-				continue
-			if result['score'] == 0:
-				continue
-			# 将每个列表中的dict本身更新
-			ol = result['only_id']
-			result_x.update(result_mo_dict[ol])
-			result_x.update(result)
-			for k, v in result_x.items():
-				if v in ['', '未公开']:
-					result_x.update({k: None})
-			result_mo_dict[ol].update(result_x)
+	ol_list = [ols[100000 * s: 100000 * (s + 1)] for s in range(ceil(len(ols) / 100000))]
+	for oo in ol_list:
+		for table in tables:
+			sel_sql = """select * from {tab} WHERE only_id in {ids}""".format(tab=table, ids=str(tuple(oo)))
+			sel_cur.execute(sel_sql)
+			results = sel_cur.fetchall()
+			result_x = {}
+			# 同一个纬度的所有列表
+			for result in results:
+				if not result:
+					continue
+				if result['score'] == 0:
+					continue
+				# 将每个列表中的dict本身更新
+				ol = result['only_id']
+				result_x.update(result_mo_dict[ol])
+				result_x.update(result)
+				for k, v in result_x.items():
+					if v in ['', '未公开']:
+						result_x.update({k: None})
+				result_mo_dict[ol].update(result_x)
 
 	value_list = [[result_mo[col_dict[in_col]] for in_col in in_cols] for result_mo in result_mo_dict.values() if
 	              result_mo['comp_full_name']]
