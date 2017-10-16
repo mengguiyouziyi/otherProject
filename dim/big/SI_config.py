@@ -28,10 +28,10 @@ sel_inser_list = [
 	# 新实例增量
 	# base
 	# tianyancha.tyc_jichu_quan   8228753 8279076
-	{'sel_columns': 'quan_cheng, tongyi_xinyong, qiye_leixing, fa_ren, zhuce_ziben, zhuce_shijian, dengji_jiguan, yingye_nianxian, jingying_zhuangtai, hezhun_riqi, jingying_fanwei',
-	'sel_table': 'tyc_jichu_quan', 'db': 'tianyancha',
-	'inser_table': 'comp_base_tyc',
-	'inser_columns': '(comp_full_name, CreditCode, EconKind, LegalPerson, RegistCapi, CreateTime, BelongOrg, BusinessLife, RegistStatus, CheckDate, BusinessScope)'},
+	# {'sel_columns': 'quan_cheng, tongyi_xinyong, qiye_leixing, fa_ren, zhuce_ziben, zhuce_shijian, dengji_jiguan, yingye_nianxian, jingying_zhuangtai, hezhun_riqi, jingying_fanwei',
+	# 'sel_table': 'tyc_jichu_quan', 'db': 'tianyancha',
+	# 'inser_table': 'comp_base_tyc',
+	# 'inser_columns': '(comp_full_name, CreditCode, EconKind, LegalPerson, RegistCapi, CreateTime, BelongOrg, BusinessLife, RegistStatus, CheckDate, BusinessScope)'},
 
 	# website
 	# tianyancha.tyc_jichu_quan 8228753
@@ -55,8 +55,8 @@ sel_inser_list = [
 
 	# contact
 	# tianyancha.tyc_jichu_quan
-	# {'sel_columns': 'quan_cheng, p_hone, e_mail', 'sel_table': 'tyc_jichu_quan', 'db': 'tianyancha',
-	#  'inser_table': 'comp_contactinfo_tyc', 'inser_columns': '(comp_full_name, phone, email)'},
+	{'sel_columns': 'quan_cheng, p_hone, e_mail', 'sel_table': 'tyc_jichu_quan', 'db': 'tianyancha',
+	 'inser_table': 'comp_contactinfo_tyc', 'inser_columns': '(comp_full_name, phone, email)'},
 
 	# intro
 	# tianyancha.tyc_jichu_quan  8230939
