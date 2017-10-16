@@ -116,7 +116,7 @@ if __name__ == '__main__':
 	这里只需更改redis_key和数字i
 	i 代表的是所要入的表格
 	"""
-	olss = get_ids("comp_gaoxin_only_id")
+	olss = get_ids("bugx_id_only_id")
 	try:
 		for i in range(10):
 			a(olss, i)
