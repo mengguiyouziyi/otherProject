@@ -101,7 +101,7 @@ def main(table_get, table_in):
 	in_con = _sqlObj('spider_dim')
 	# in_col = _get_column(in_con, table_in)
 
-	start = i = 9693
+	start = i = 13218691
 	while True:
 		results = selectFun(sel_con, table_get, start=start)
 		if not results:
@@ -113,15 +113,16 @@ def main(table_get, table_in):
 		for result in results:
 			i += 1
 			print(i)
-			comp_full_name = _get_redis(result['t_id'])
-			result['comp_full_name'] = comp_full_name if comp_full_name else ''
+			# 这两行临时注释
+			# comp_full_name = _get_redis(result['t_id'])
+			# result['comp_full_name'] = comp_full_name if comp_full_name else ''
+			result['comp_full_name'] = ''
 			# columns_list = in_col.split(',')
 			# values = [result[column] for column in columns_list]
 			values = [result['comp_full_name'], result['t_id'], result['m_name'], result['m_position'], '', '', result['logo_url'], '', '', result['m_experience']]
 			value_list.append(values)
 			if len(value_list) == 50000:
 				insertManyFun(in_con, table_in, value_list)
-				print('done')
 				value_list.clear()
 			else:
 				continue

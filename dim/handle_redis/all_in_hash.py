@@ -11,10 +11,11 @@ sys.path.extend([f, ff, fff])
 
 import pymysql
 import traceback
-from dim.utility.tools import get_redis_db, in_redis_hash
+from dim.utility.tools import get_redis_db, in_redis_hash, in_redis_string
 
 # redis_db = get_redis_db(host='a027.hb2.innotree.org')
-redis_db = get_redis_db(host='a027.hb2.innotree.org')
+redis_db = get_redis_db(host='10.44.152.49', db=10)
+
 sel_config = {'host': 'etl1.innotree.org',
               'port': 3308,
               'user': 'spider',
@@ -31,7 +32,7 @@ def in_redis_all_tycid():
 	将全量天眼查id入到redis总量key中
 	:return:
 	"""
-	sta = 4000000
+	sta = 5000000
 	while True:
 		all_sql = """select t_id, quan_cheng from tyc_jichu_quan limit {sta}, 500000""".format(nsta=sta)
 		sel_cur.execute(all_sql)
@@ -39,9 +40,9 @@ def in_redis_all_tycid():
 		if not results:
 			break
 		for result in results:
-			comp_id = result['t_id']
-			comp_full_name = result['quan_cheng']
-			in_redis_hash(redis_db, 'tycid_name_all', comp_id, comp_full_name)
+			t_id = result['t_id']
+			quan_cheng = result['quan_cheng']
+			in_redis_string(redis_db, t_id, quan_cheng)
 		sta += len(results)
 		print(sta)
 

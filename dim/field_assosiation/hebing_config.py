@@ -9,9 +9,9 @@ sel_table(搜索表名),
 inser_table(插入表名)，inser_columns(插入字段) 即可
 """
 sel_inser_list = [
-	# spider.tyc_gudongxin xin 10438374
-	# {'sel_table': 'tyc_gudongxin', 'inser_table': 'comp_gudong_tyc',},
-	#  'inser_columns': '(comp_full_name, t_id, p_name, p_tid, chuzi_bili, renjiao_chuzi)'},
+	# spider.tyc_gudongxin xin 10438374  13218691
+	{'sel_table': 'tyc_gudongxin', 'inser_table': 'comp_gudong_tyc',},
+	 # 'inser_columns': '(comp_full_name, t_id, p_name, p_tid, chuzi_bili, renjiao_chuzi)'},
 	# spider.tyc_gudongxin1
 	# {'sel_table': 'tyc_gudongxin1', 'inser_table': 'm_tyc_gudongxin',
 	#  'inser_columns': '(comp_full_name, t_id, p_name, p_tid, chuzi_bili, renjiao_chuzi)'},

@@ -10,7 +10,7 @@ import pymysql
 from dim.utility.tools import get_redis_db
 
 a027_db = get_redis_db(host='a027.hb2.innotree.org')
-a024_db = get_redis_db(host='10.44.152.49')
+a024_db = get_redis_db(host='10.44.152.49', db=10)
 
 
 etl_config = {'host': 'etl1.innotree.org',
