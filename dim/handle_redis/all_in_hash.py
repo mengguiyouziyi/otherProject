@@ -12,39 +12,42 @@ sys.path.extend([f, ff, fff])
 import pymysql
 import traceback
 from dim.utility.tools import get_redis_db, in_redis_hash, in_redis_string
+from dim.utility.info import a024, a027, etl_config, xin_config, online_config
 
-# redis_db = get_redis_db(host='a027.hb2.innotree.org')
-redis_db = get_redis_db(host='10.44.152.49', db=10)
+a027_db = get_redis_db(a027)
+# a024_db = get_redis_db(a024)
 
-sel_config = {'host': 'etl1.innotree.org',
-              'port': 3308,
-              'user': 'spider',
-              'password': 'spider',
-              'db': 'dimension_result',
-              'charset': 'utf8',
-              'cursorclass': pymysql.cursors.DictCursor}
-sel_mysql = pymysql.connect(**sel_config)
-sel_cur = sel_mysql.cursor()
+etl = pymysql.connect(**etl_config)
+etl.select_db('tyc')
+etl_cur = etl.cursor()
+
+# xin = pymysql.connect(**xin_config)
+# xin.select_db('tianyancha')
+# xin_cur = xin.cursor()
+#
+# online = pymysql.connect(**online_config)
+# online.select_db('innotree_data_online')
+# online_cur = online.cursor()
 
 
-def in_redis_all_tycid():
-	"""
-	将全量天眼查id入到redis总量key中
-	:return:
-	"""
-	sta = 5000000
-	while True:
-		all_sql = """select t_id, quan_cheng from tyc_jichu_quan limit {sta}, 500000""".format(nsta=sta)
-		sel_cur.execute(all_sql)
-		results = sel_cur.fetchall()
-		if not results:
-			break
-		for result in results:
-			t_id = result['t_id']
-			quan_cheng = result['quan_cheng']
-			in_redis_string(redis_db, t_id, quan_cheng)
-		sta += len(results)
-		print(sta)
+# def in_redis_all_tycid():
+# 	"""
+# 	将全量天眼查id入到redis总量key中
+# 	:return:
+# 	"""
+# 	sta = 0
+# 	while True:
+# 		all_sql = """select t_id, quan_cheng from tyc_jichu_quan limit {sta}, 500000""".format(nsta=sta)
+# 		sel_cur.execute(all_sql)
+# 		results = sel_cur.fetchall()
+# 		if not results:
+# 			break
+# 		for result in results:
+# 			t_id = result['t_id']
+# 			quan_cheng = result['quan_cheng']
+# 			in_redis_string(redis_db, t_id, quan_cheng)
+# 		sta += len(results)
+# 		print(sta)
 
 
 def in_redis_all():
@@ -58,15 +61,15 @@ def in_redis_all():
 		while True:
 			all_sql = """select only_id, comp_full_name from comp_base_result{num} limit {sta}, 500000""".format(num=n,
 			                                                                                                     sta=sta)
-			sel_cur.execute(all_sql)
-			results = sel_cur.fetchall()
+			etl_cur.execute(all_sql)
+			results = etl_cur.fetchall()
 			if not results:
 				break
 			for result in results:
 				comp_id = result['only_id']
 				comp_full_name = result['comp_full_name']
-				in_redis_hash(redis_db, 'id_name_all', comp_id, comp_full_name)
-				in_redis_hash(redis_db, 'name_id_all', comp_full_name, comp_id)
+				in_redis_hash(a027_db, 'id_name_all', comp_id, comp_full_name)
+				in_redis_hash(a027_db, 'name_id_all', comp_full_name, comp_id)
 			sta += len(results)
 			print(sta)
 		all_ids += sta
@@ -84,13 +87,13 @@ def in_redis_num():
 		sta = 0
 		while True:
 			all_sql = """select only_id from comp_base_result{num} limit {sta}, 500000""".format(num=n, sta=sta)
-			sel_cur.execute(all_sql)
-			results = sel_cur.fetchall()
+			etl_cur.execute(all_sql)
+			results = etl_cur.fetchall()
 			if not results:
 				break
 			for result in results:
 				comp_id = result['only_id']
-				in_redis_hash(redis_db, re_key, comp_id, '')
+				in_redis_hash(a027_db, re_key, comp_id, '')
 			sta += len(results)
 			print(sta)
 		all_ids += sta
@@ -104,4 +107,4 @@ if __name__ == '__main__':
 	except:
 		traceback.print_exc()
 	finally:
-		sel_mysql.close()
+		etl.close()

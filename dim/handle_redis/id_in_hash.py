@@ -17,7 +17,23 @@ import pymysql
 # import redis
 import traceback
 from dim.utility.tools import get_redis_db, in_redis_hash
+from dim.utility.info import a024, a027, etl_config, xin_config, online_config
 
+a027_db = get_redis_db(a027)
+# a024_db = get_redis_db(a024)
+
+etl = pymysql.connect(**etl_config)
+etl.select_db('tyc')
+etl_cur = etl.cursor()
+
+
+# xin = pymysql.connect(**xin_config)
+# xin.select_db('tianyancha')
+# xin_cur = xin.cursor()
+#
+# online = pymysql.connect(**online_config)
+# online.select_db('innotree_data_online')
+# online_cur = online.cursor()
 
 # def isRegister(_oneid):
 # 	"""
@@ -100,39 +116,27 @@ from dim.utility.tools import get_redis_db, in_redis_hash
 # 		mysql2.close()
 
 
-def in_redis_id(conf, tab, col, re_key):
+def in_redis_id(cur, tab, col, re_key):
 	"""
 	只入id
-	:param conf:
+	:param cur:
 	:param col:
 	:param tab:
 	:param re_key:
 	:return:
 	"""
-	mysql = pymysql.connect(**conf)
-	cur = mysql.cursor()
-	try:
-		sql = """select {col} from {tab}""".format(col=col, tab=tab)
-		cur.execute(sql)
-		results = cur.fetchall()
-
-		redis_db = get_redis_db(host='a027.hb2.innotree.org')
-		for i, result in enumerate(results):
-			print(i)
-			in_redis_hash(redis_db, re_key, result[col], '')
-
-	except:
-		traceback.print_exc()
-	finally:
-		mysql.close()
+	sql = """select {col} from {tab}""".format(col=col, tab=tab)
+	cur.execute(sql)
+	results = cur.fetchall()
+	for i, result in enumerate(results):
+		print(i)
+		in_redis_hash(a027_db, re_key, result[col], '')
 
 
 if __name__ == '__main__':
-	online_config = {'host': '47.95.31.183',
-	                 'port': 3306,
-	                 'user': 'test',
-	                 'password': '123456',
-	                 'db': 'innotree_data_online',
-	                 'charset': 'utf8',
-	                 'cursorclass': pymysql.cursors.DictCursor}
-	in_redis_id(online_config, 'comp_gaoxin', 'comp_id', 'comp_gaoxin_only_id')
+	try:
+		in_redis_id(etl_cur, 'bugx_id', 'comp_id', 'bugx_id_only_id')
+	except:
+		traceback.print_exc()
+	finally:
+		etl.close()
