@@ -39,6 +39,7 @@ def in_redis_all_tycid(cur, tab, sta=0):
 	将全量t_id入到redis总量key中
 	:return:
 	"""
+	print('~~~~~~~~~~~~~~~'+str(tab)+'~~~~~~~~~~~~~~~~~')
 	while True:
 		all_sql = """select t_id, quan_cheng from {tab} limit {sta}, 500000""".format(tab=tab, sta=sta)
 		cur.execute(all_sql)
@@ -65,5 +66,6 @@ if __name__ == '__main__':
 	except:
 		traceback.print_exc()
 	finally:
+		setl.close()
 		etl.close()
 		xin.close()
