@@ -307,8 +307,12 @@ if __name__ == '__main__':
 	# print(has)
 	soo = a027_db.hscan('bugx_id_only_id')
 	print(soo)
-	while soo[0]:
+	for id, name in soo[1].items():
+		print(id, name)
+	while True:
 		print(soo[0])
 		soo = a027_db.hscan('bugx_id_only_id', soo[0])
 		for id, name in soo[1].items():
 			print(id, name)
+		if soo[0] == 0:
+			break
