@@ -1,5 +1,5 @@
 """
-将 only_id:comp_full_name 放入 id_name_all
+按照尾号 only_id:comp_full_name 放入 id_name_all
 """
 import os
 import sys
@@ -21,26 +21,24 @@ etl.select_db('dimension_result')
 etl_cur = etl.cursor()
 
 
-def in_redis_all():
+def in_redis_num():
 	"""
-	将全量id入到redis总量key中（全量）
+	按尾号将id插入redis不同key中（全量）
 	:return:
 	"""
 	all_ids = 0
 	for n in range(10):
+		re_key = 'id_name_all_{num}'.format(num=n)
 		sta = 0
 		while True:
-			all_sql = """select only_id, comp_full_name from comp_base_result{num} limit {sta}, 500000""".format(num=n,
-			                                                                                                     sta=sta)
+			all_sql = """select only_id from comp_base_result{num} limit {sta}, 500000""".format(num=n, sta=sta)
 			etl_cur.execute(all_sql)
 			results = etl_cur.fetchall()
 			if not results:
 				break
 			for result in results:
 				comp_id = result['only_id']
-				comp_full_name = result['comp_full_name']
-				in_redis_hash(a027_db, 'id_name_all', comp_id, comp_full_name)
-				in_redis_hash(a027_db, 'name_id_all', comp_full_name, comp_id)
+				in_redis_hash(a027_db, re_key, comp_id, '')
 			sta += len(results)
 			print(sta)
 		all_ids += sta
@@ -49,7 +47,7 @@ def in_redis_all():
 
 if __name__ == '__main__':
 	try:
-		in_redis_all()
+		in_redis_num()
 	except:
 		traceback.print_exc()
 	finally:

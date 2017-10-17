@@ -3,6 +3,7 @@
 """
 import os
 import sys
+
 f = os.path.abspath(os.path.dirname(__file__))
 ff = os.path.dirname(f)
 fff = os.path.dirname(ff)
@@ -11,8 +12,6 @@ import pymysql
 from math import ceil
 from dim.utility.tools import get_redis_db, get_mysql_con, get_redis_field, _handle_str
 from dim.utility.info import a024, a027, etl_config, xin_config, online_config
-
-
 
 col_dict = {'comp_id': 'only_id', 'comp_full_name': 'comp_full_name', 'comp_short_name': 'chinese_short',
             'comp_english_short': 'english_short', 'comp_credit_code': 'CreditCode',
@@ -44,14 +43,23 @@ online.select_db('innotree_data')
 online_cur = online.cursor()
 
 
-def get_ids(re_key):
+def get_all_ids(re_key):
 	"""
-	一次性获取 re_key 中的全量 only_id
+	全量获取 only_ids
 	:param re_key:
 	:return:
 	"""
 	only_ids = get_redis_field(a027_db, re_key)
-	ols = [only_id.decode('utf-8') for only_id in only_ids]
+	return only_ids
+
+
+def get_num_ids(only_ids, i):
+	"""
+	将 only_ids 按照尾号 分类返回
+	:param re_key:
+	:return:
+	"""
+	ols = [only_id.decode('utf-8') for only_id in only_ids if only_id.decode('utf-8').endswith(str(i))]
 	return ols
 
 
@@ -115,7 +123,11 @@ if __name__ == '__main__':
 	try:
 		for i in range(10):
 			re_key = 'id_name_all_{num}'.format(num=i)
-			ols = get_ids(re_key)
+			only_ids = get_all_ids(re_key)
+			ols = get_num_ids(only_ids, i)
+			# 如有100个，则s=0，1；0--ols[0:100000];1--ols[100000:200000]
+			# 注意上限不会取
+			# 这个主要是为了将大数据量分成小列表，如果本身就是小列表，只执行一次
 			ol_list = [ols[100000 * s: 100000 * (s + 1)] for s in range(ceil(len(ols) / 100000))]
 			for oo in ol_list:
 				together(oo, i)
