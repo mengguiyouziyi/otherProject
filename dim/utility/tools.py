@@ -11,7 +11,7 @@ ff = os.path.dirname(f)
 fff = os.path.dirname(ff)
 sys.path.extend([f, ff, fff])
 
-from dim.utility.info import a024, a027, etl_config, xin_config, online_config
+from .info import a024, a027, etl_config, xin_config, online_config
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
