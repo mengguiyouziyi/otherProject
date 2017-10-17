@@ -305,7 +305,7 @@ if __name__ == '__main__':
 	a027_db = get_redis_db(a027)
 	# has = hexists(a027_db, 'id_name_all', '15745982479273366790')
 	# print(has)
-	soo = a027_db.hscan('id_name_all', 5)
+	soo = a027_db.hscan('id_name_all')
 	while True:
 		print(soo[0], len(soo[1]))
 		# for id, name in soo[1].items():
