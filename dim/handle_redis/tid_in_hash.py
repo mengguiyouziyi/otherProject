@@ -14,8 +14,8 @@ import traceback
 from dim.utility.tools import get_redis_db, in_redis_hash, in_redis_string
 from dim.utility.info import a024, a027, etl_config, xin_config, online_config
 
-# a027_db = get_redis_db(a027)
-#
+a027_db = get_redis_db(a027)
+
 # etl = pymysql.connect(**etl_config)
 #
 # etl.select_db('spider')
@@ -63,5 +63,5 @@ if __name__ == '__main__':
 	except:
 		traceback.print_exc()
 	finally:
-		etl.close()
+		# etl.close()
 		xin.close()
