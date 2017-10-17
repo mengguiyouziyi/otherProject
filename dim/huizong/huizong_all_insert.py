@@ -10,7 +10,7 @@ fff = os.path.dirname(ff)
 sys.path.extend([f, ff, fff])
 import pymysql
 from math import ceil
-from dim.utility.tools import get_redis_db, get_mysql_con, get_redis_field, _handle_str
+from dim.utility.tools import get_redis_db, get_mysql_con, get_redis_field, _handle_str, hexists
 from dim.utility.info import a024, a027, etl_config, xin_config, online_config
 
 col_dict = {'comp_id': 'only_id', 'comp_full_name': 'comp_full_name', 'comp_short_name': 'chinese_short',
@@ -66,7 +66,7 @@ def get_num_ids(only_ids, i):
 def together(oo, i):
 	"""
 	五个纬度 汇总
-	:param ols: 某一尾号的 only_id 列表
+	:param oo: 某一尾号的 only_id 列表
 	:param i: 尾号-表
 	:return:
 	"""
@@ -78,7 +78,9 @@ def together(oo, i):
 	result_mo = {}.fromkeys(col_dict.values())
 
 	result_mo_dict = {}
-	for only_id in ols:
+	for only_id in oo:
+		if not hexists(a027_db, 'id_name_all', only_id):
+			continue
 		result_mo['only_id'] = only_id
 		result_mo_dict[only_id] = result_mo.copy()
 

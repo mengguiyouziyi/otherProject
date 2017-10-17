@@ -1,23 +1,22 @@
-import pymysql
-import os
 import time
 import logging
 import redis
-
+import pymysql
 import io
+import os
 import sys
+
+f = os.path.abspath(os.path.dirname(__file__))
+ff = os.path.dirname(f)
+fff = os.path.dirname(ff)
+sys.path.extend([f, ff, fff])
+
+from dim.utility.info import a024, a027, etl_config, xin_config, online_config
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
 path = os.path.abspath(os.path.dirname(__file__))
 sys.path.append(path)
-
-logger = logging.getLogger(__name__)
-ch = logging.StreamHandler()
-ch.setLevel(logging.DEBUG)
-formatter = logging.Formatter('%(asctime)s %(name)s- %(levelname)s - %(message)s')
-ch.setFormatter(formatter)
-logger.addHandler(ch)
 
 
 def get_redis_db(host, port=6379, db=0):
@@ -31,6 +30,17 @@ def get_redis_db(host, port=6379, db=0):
 	pool = redis.ConnectionPool(host=host, port=port, db=db)
 	redis_db = redis.StrictRedis(connection_pool=pool, decode_responses=True)
 	return redis_db
+
+
+def hexists(redis_db, key, field):
+	"""
+	判断是否含有hash field
+	:param redis_db:
+	:param key:
+	:param field:
+	:return:
+	"""
+	return redis_db.hexists(key, field)
 
 
 def get_redis_field(redis_db, key):
@@ -137,7 +147,8 @@ def get_col_str(con, db, tab):
 	return columns_str
 
 
-def sel_fun(sel_con, sel_db, sel_tab, con_value=None, sel_col='*', start=0, lim=500000, where=None, condition='only_id'):
+def sel_fun(sel_con, sel_db, sel_tab, con_value=None, sel_col='*', start=0, lim=500000, where=None,
+            condition='only_id'):
 	"""
 	查询表并返回元素为dict的结果集
 	:param sel_con: 查询表所在的连接
@@ -291,21 +302,6 @@ def add_values(result, update_dict):
 
 
 if __name__ == '__main__':
-	mysql_config1 = {'host': 'etl1.innotree.org',
-	                 'port': 3308,
-	                 'user': 'spider',
-	                 'password': 'spider',
-	                 # 'db': 'spider_dim',
-	                 'charset': 'utf8',
-	                 'cursorclass': pymysql.cursors.DictCursor}
-
-	mysql_config2 = {'host': '10.252.0.52',
-	                 'port': 3306,
-	                 'user': 'etl_tmp',
-	                 'password': 'UsF4z5HE771KQpra',
-	                 # 'db': 'tianyancha',
-	                 'charset': 'utf8',
-	                 'cursorclass': pymysql.cursors.DictCursor}
-
-	QUEUE_REDIS_HOST = ''
-	QUEUE_REDIS_PORT = 6379
+	a027_db = get_redis_db(a027)
+	has = hexists(a027_db, 'id_name_all', 15745982479273366790)
+	print(has)
