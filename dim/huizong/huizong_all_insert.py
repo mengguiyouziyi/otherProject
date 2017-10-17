@@ -10,8 +10,8 @@ fff = os.path.dirname(ff)
 sys.path.extend([f, ff, fff])
 import pymysql
 from math import ceil
-from dim.utility.tools import get_redis_db, get_mysql_con, get_redis_field, _handle_str, hexists
-from dim.utility.info import a024, a027, etl_config, xin_config, online_config
+from dim.utility.tools import get_redis_db, get_redis_field, _handle_str, hexists
+from dim.utility.info import a027, etl_config, online_config
 
 col_dict = {'comp_id': 'only_id', 'comp_full_name': 'comp_full_name', 'comp_short_name': 'chinese_short',
             'comp_english_short': 'english_short', 'comp_credit_code': 'CreditCode',
@@ -28,15 +28,10 @@ table_list = ['comp_contactinfo_result', 'comp_intro_result', 'comp_registaddr_r
               'comp_shortname_result', 'comp_base_result']
 
 a027_db = get_redis_db(a027)
-# a024_db = get_redis_db(a024)
 
 etl = pymysql.connect(**etl_config)
 etl.select_db('dimension_result')
 result_cur = etl.cursor()
-
-# xin = pymysql.connect(**xin_config)
-# xin.select_db('tianyancha')
-# xin_cur = xin.cursor()
 
 online = pymysql.connect(**online_config)
 online.select_db('innotree_data')
@@ -46,6 +41,7 @@ online_cur = online.cursor()
 def get_all_ids(re_key):
 	"""
 	全量获取 only_ids
+	有可能是分尾号的，有可能是全量的
 	:param re_key:
 	:return:
 	"""
@@ -56,6 +52,8 @@ def get_all_ids(re_key):
 def get_num_ids(only_ids, i):
 	"""
 	将 only_ids 按照尾号 分类返回
+	如果是分尾号的，传进来的就是已经分好的；
+	如果是全量的，
 	:param re_key:
 	:return:
 	"""
@@ -79,8 +77,9 @@ def together(oo, i):
 
 	result_mo_dict = {}
 	for only_id in oo:
-		if not hexists(a027_db, 'id_name_all', only_id):
-			continue
+		# 这里当不确定输入有么有注册时，放开
+		# if not hexists(a027_db, 'id_name_all', only_id):
+		# 	continue
 		result_mo['only_id'] = only_id
 		result_mo_dict[only_id] = result_mo.copy()
 
@@ -124,14 +123,16 @@ def together(oo, i):
 if __name__ == '__main__':
 	try:
 		for i in range(10):
+			# 如果传入的全量表，这两句需要放到循环外面
 			re_key = 'id_name_all_{num}'.format(num=i)
-			only_ids = get_all_ids(re_key)
-			ols = get_num_ids(only_ids, i)
+			only_ids = get_all_ids(re_key)  # 全量
+
+			ols = get_num_ids(only_ids, i)  # 某个尾号全量
 			# 如有100个，则s=0，1；0--ols[0:100000];1--ols[100000:200000]
 			# 注意上限不会取
 			# 这个主要是为了将大数据量分成小列表，如果本身就是小列表，只执行一次
-			ol_list = [ols[100000 * s: 100000 * (s + 1)] for s in range(ceil(len(ols) / 100000))]
-			for oo in ol_list:
+			ol_list = [ols[100000 * s: 100000 * (s + 1)] for s in range(ceil(len(ols) / 100000))]  # 某个尾号分成小列表的列表
+			for oo in ol_list:  # 某个尾号分成100000个的小列表
 				together(oo, i)
 	finally:
 		etl.close()
