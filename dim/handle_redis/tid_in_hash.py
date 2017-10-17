@@ -59,7 +59,7 @@ if __name__ == '__main__':
 		# in_redis_all_tycid(tyc_cur, 'tyc_jichu_quan')
 		# in_redis_all_tycid(tyc_cur, 'tyc_jichu_quan1')
 
-		in_redis_all_tycid(xin_cur, 'tyc_jichu_quan')
+		in_redis_all_tycid(xin_cur, 'tyc_jichu_quan', 1500000)
 	except:
 		traceback.print_exc()
 	finally:
