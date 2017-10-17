@@ -310,6 +310,6 @@ if __name__ == '__main__':
 		print(soo[0], len(soo[1]))
 		# for id, name in soo[1].items():
 		# 	print(id, name)
-		soo = a027_db.hscan('id_name_all', soo[0], 5)
+		soo = a027_db.hscan('id_name_all', soo[0])
 		if soo[0] == 0:
 			break
