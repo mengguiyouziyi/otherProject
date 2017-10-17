@@ -303,5 +303,7 @@ def add_values(result, update_dict):
 
 if __name__ == '__main__':
 	a027_db = get_redis_db(a027)
-	has = hexists(a027_db, 'id_name_all', '15745982479273366790')
-	print(has)
+	# has = hexists(a027_db, 'id_name_all', '15745982479273366790')
+	# print(has)
+	so = a027_db.hscan('id_name_all')
+	print(so)
