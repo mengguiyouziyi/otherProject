@@ -313,7 +313,8 @@ if __name__ == '__main__':
 	# 	soo = a027_db.hscan('id_name_all', soo[0], count=100)
 	# 	if soo[0] == 0:
 	# 		break
-	so = a027_db.hscan_iter('id_name_all')
+	so = a027_db.hscan_iter('id_name_all', count=10)
+	print(so)
 	for i in so:
 		print(i)
-	print(so)
+		time.sleep(1)
