@@ -317,4 +317,3 @@ if __name__ == '__main__':
 	print(so)
 	for i in so:
 		print(i)
-		time.sleep(1)
