@@ -61,7 +61,7 @@ def get_num_ids(only_ids, i):
 	return ols
 
 
-def together(oo, i):
+def together(oo, i, sum_n):
 	"""
 	五个纬度 汇总
 	:param oo: 某一尾号的 only_id 列表
@@ -106,9 +106,8 @@ def together(oo, i):
 	value_list = [[result_mo[col_dict[in_col]] for in_col in in_cols] for result_mo in result_mo_dict.values() if
 	              result_mo['comp_full_name']]
 	values = []
-	for j, value in enumerate(value_list):
-		j += 1
-		print(j)
+	for value in value_list:
+		sum_n += 1
 		values.append(value)
 		if len(values) == 3000:
 			online_cur.executemany(in_sql, values)
@@ -118,11 +117,14 @@ def together(oo, i):
 			continue
 	online_cur.executemany(in_sql, values)
 	online.commit()
+	return sum_n
 
 
 if __name__ == '__main__':
 	try:
+		sum_all = 0
 		for i in range(10):
+			sum_n = 0
 			# 如果传入的全量表，这两句需要放到循环外面
 			re_key = 'id_name_all_{num}'.format(num=i)
 			only_ids = get_all_ids(re_key)  # 全量
@@ -133,7 +135,12 @@ if __name__ == '__main__':
 			# 这个主要是为了将大数据量分成小列表，如果本身就是小列表，只执行一次
 			ol_list = [ols[100000 * s: 100000 * (s + 1)] for s in range(ceil(len(ols) / 100000))]  # 某个尾号分成小列表的列表
 			for oo in ol_list:  # 某个尾号分成100000个的小列表
-				together(oo, i)
+				sum_m = together(oo, i, sum_n)
+				sum_n += sum_m
+				print('~~~~~~~~~~~~~~~~'+str(sum_n)+'~~~~~~~~~~~~~~~~')
+			sum_all += sum_n
+		print('==============='+str(sum_all)+'================')
+
 	finally:
 		etl.close()
 		online.close()
