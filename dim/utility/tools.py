@@ -306,13 +306,11 @@ if __name__ == '__main__':
 	# has = hexists(a027_db, 'id_name_all', '15745982479273366790')
 	# print(has)
 	soo = a027_db.hscan('bugx_id_only_id')
-	print(soo)
-	for id, name in soo[1].items():
-		print(id, name)
 	while True:
-		print(soo[0])
-		soo = a027_db.hscan('bugx_id_only_id', soo[0])
+		print(soo[0], len(soo[1]))
 		for id, name in soo[1].items():
 			print(id, name)
+		soo = a027_db.hscan('id_only_id', soo[0])
 		if soo[0] == 0:
 			break
+		time.sleep(3)
