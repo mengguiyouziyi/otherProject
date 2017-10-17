@@ -313,4 +313,3 @@ if __name__ == '__main__':
 		soo = a027_db.hscan('id_name_all', soo[0], 1000)
 		if soo[0] == 0:
 			break
-		time.sleep(3)
