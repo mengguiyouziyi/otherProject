@@ -315,5 +315,8 @@ if __name__ == '__main__':
 	# 		break
 	so = a027_db.hscan_iter('id_name_all', count=10)
 	print(so)
+	j = 0
 	for i in so:
+		j += 1
+		print(j)
 		print(i)
