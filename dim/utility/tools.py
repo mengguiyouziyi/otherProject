@@ -302,7 +302,10 @@ def add_values(result, update_dict):
 
 
 if __name__ == '__main__':
-	a027_db = get_redis_db(a027)
+	pass
+	# ++++++++++++++ 这里用来测试hscan，遍历hscan的语法 +++++++++++++++++++++ #
+
+	# a027_db = get_redis_db(a027)
 	# has = hexists(a027_db, 'id_name_all', '15745982479273366790')
 	# print(has)
 	# soo = a027_db.hscan('id_name_all', count=100)
@@ -313,10 +316,13 @@ if __name__ == '__main__':
 	# 	soo = a027_db.hscan('id_name_all', soo[0], count=100)
 	# 	if soo[0] == 0:
 	# 		break
-	so = a027_db.hscan_iter('id_name_all', count=10)
-	print(so)
-	j = 0
-	for i in so:
-		j += 1
-		print(j)
-		print(i)
+
+	# ++++++++++++++ 这里这个count不知道啥意思，仿佛是一个鸡肋 +++++++++++++++++++++ #
+	# so = a027_db.hscan_iter('id_name_all', count=10)
+	# print(so)
+	# j = 0
+	# for i in so:
+	# 	j += 1
+	# 	print(j)
+	# 	print(i)
+	# ++++++++++++++ 这里这个count不知道啥意思，仿佛是一个鸡肋 +++++++++++++++++++++ #

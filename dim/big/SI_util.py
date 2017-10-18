@@ -29,7 +29,7 @@ def selectFun(columns, tab, start, num, db='spider'):
 	select_sql = """select {columns} from {tab} limit {start}, {num}""".format(
 		columns=columns, tab=tab, start=start, num=num)
 	print(select_sql)
-	select_con, select_cur = _sqlObj1(db)
+	select_con, select_cur = _sqlObj(db)
 	try:
 		select_cur.execute(select_sql)
 		results = select_cur.fetchall()
@@ -86,7 +86,7 @@ def _handle_str(num):
 
 def _sqlObj(db):
 	"""
-	连接数据库并获取游标
+	etl1.innotree.org
 	参数：数据库
 	"""
 	connect = pymysql.connect(host='etl1.innotree.org', port=3308, user='spider', password='spider', db=db,
@@ -97,7 +97,7 @@ def _sqlObj(db):
 
 def _sqlObj1(db):
 	"""
-	连接数据库并获取游标
+	10.252.0.52
 	参数：数据库
 	"""
 	connect = pymysql.connect(host='10.252.0.52', port=3306, user='etl_tmp', password='UsF4z5HE771KQpra', db=db,

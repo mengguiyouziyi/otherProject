@@ -9,6 +9,14 @@ sel_columns(搜索字段)，sel_table(搜索表名), db(搜索数据库)，
 inser_table(插入表名)，inser_columns(插入字段) 即可
 """
 sel_inser_list = [
+	# spider.hw_app
+	{
+		'sel_columns': 'auth, logo_url, pname, soft_name, down_num, soft_score, soft_size, version, pic_url, des, create_date, comm_num',
+		'sel_table': 'hw_app', 'db': 'spider',
+		'inser_table': 'item_app_huawei',
+		'inser_columns': '(comp_full_name, app_pic, app_pack_name, app_name, down_num, score, size, version, pictures, description, update_time, comm_num)'},
+
+
 	# 机构jigou
 	# dw_online.si_jiben 有数据 不知道有没有一直更新
 	# {'sel_columns': 'company_full_name,s_id,logo,company_abbreviation,company_eng_abbreviation,web,establishment_time,capital_type,organization_form,VC,managed_capital,registered_area,corporate_headquarters,keep_on_record,registration_number,describe,filing_time,p_id',
