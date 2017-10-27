@@ -9,7 +9,8 @@ sys.path.extend([f, ff, fff])
 import pymysql
 
 a027 = 'a027.hb2.innotree.org'
-a024 = '10.44.152.49'
+a020 = '10.44.152.49'
+a024 = '10.44.51.90'
 
 
 etl_config = {'host': 'etl1.innotree.org',
