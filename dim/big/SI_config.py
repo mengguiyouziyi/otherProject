@@ -35,7 +35,7 @@ sel_inser_list = [
 
 	# 新实例增量
 	# base
-	# tianyancha.tyc_jichu_quan   8228753 8279076
+	# tianyancha.tyc_jichu_quan   8228753 8279076 8288248
 	# {'sel_columns': 'quan_cheng, tongyi_xinyong, qiye_leixing, fa_ren, zhuce_ziben, zhuce_shijian, dengji_jiguan, yingye_nianxian, jingying_zhuangtai, hezhun_riqi, jingying_fanwei',
 	# 'sel_table': 'tyc_jichu_quan', 'db': 'tianyancha',
 	# 'inser_table': 'comp_base_tyc',
