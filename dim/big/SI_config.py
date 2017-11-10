@@ -18,11 +18,11 @@ sel_inser_list = [
 	# {'sel_columns': 'comp_name, intro', 'sel_table': 'jianjie_114_all', 'db': 'spider',
 	#  'inser_table': 'comp_intro_114', 'inser_columns': '(comp_full_name, intro)'},
 	#
-	{'sel_columns': 'comp_name, intro', 'sel_table': 'jianjie_huangye88_all', 'db': 'spider',
-	 'inser_table': 'comp_intro_huangye88', 'inser_columns': '(comp_full_name, intro)'},
+	# {'sel_columns': 'comp_name, intro', 'sel_table': 'jianjie_huangye88_all', 'db': 'spider',
+	#  'inser_table': 'comp_intro_huangye88', 'inser_columns': '(comp_full_name, intro)'},
 	#
-	# {'sel_columns': 'comp_name, intro', 'sel_table': 'jianjie_wuyou_all', 'db': 'spider',
-	#  'inser_table': 'comp_intro_wuyou', 'inser_columns': '(comp_full_name, intro)'},
+	{'sel_columns': 'comp_name, intro', 'sel_table': 'jianjie_wuyou_all', 'db': 'spider',
+	 'inser_table': 'comp_intro_wuyou', 'inser_columns': '(comp_full_name, intro)'},
 
 	# spider.hw_app
 	# {
