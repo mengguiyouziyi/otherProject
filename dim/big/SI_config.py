@@ -9,13 +9,27 @@ sel_columns(搜索字段)，sel_table(搜索表名), db(搜索数据库)，
 inser_table(插入表名)，inser_columns(插入字段) 即可
 """
 sel_inser_list = [
-	# spider.hw_app
-	{
-		'sel_columns': 'auth, logo_url, pname, soft_name, down_num, soft_score, soft_size, version, pic_url, des, create_date, comm_num',
-		'sel_table': 'hw_app', 'db': 'spider',
-		'inser_table': 'item_app_huawei',
-		'inser_columns': '(comp_full_name, app_pic, app_pack_name, app_name, down_num, score, size, version, pictures, description, update_time, comm_num)'},
 
+	# intro
+	# tyc.tyc_jichu_quan
+	{'sel_columns': 'comp_name, intro', 'sel_table': 'jianjie_shunqi_all', 'db': 'spider',
+	 'inser_table': 'comp_intro_shunqi', 'inser_columns': '(comp_full_name, intro)'},
+
+	# {'sel_columns': 'comp_name, intro', 'sel_table': 'jianjie_114_all', 'db': 'spider',
+	#  'inser_table': 'comp_intro_114', 'inser_columns': '(comp_full_name, intro)'},
+	#
+	# {'sel_columns': 'comp_name, intro', 'sel_table': 'jianjie_huangye88_all', 'db': 'spider',
+	#  'inser_table': 'comp_intro_huangye88', 'inser_columns': '(comp_full_name, intro)'},
+	#
+	# {'sel_columns': 'comp_name, intro', 'sel_table': 'jianjie_wuyou_all', 'db': 'spider',
+	#  'inser_table': 'comp_intro_wuyou', 'inser_columns': '(comp_full_name, intro)'},
+
+	# spider.hw_app
+	# {
+	# 	'sel_columns': 'auth, logo_url, pname, soft_name, down_num, soft_score, soft_size, version, pic_url, des, create_date, comm_num',
+	# 	'sel_table': 'hw_app', 'db': 'spider',
+	# 	'inser_table': 'item_app_huawei',
+	# 	'inser_columns': '(comp_full_name, app_pic, app_pack_name, app_name, down_num, score, size, version, pictures, description, update_time, comm_num)'},
 
 	# 机构jigou
 	# dw_online.si_jiben 有数据 不知道有没有一直更新
@@ -24,14 +38,12 @@ sel_inser_list = [
 	#  'inser_table': 'jigou_base_smt',
 	#  'inser_columns': '(comp_full_name,s_id,logo,company_abbreviation,company_eng_abbreviation,web,establishment_time,capital_type,organization_form,VC,managed_capital,registered_area,corporate_headquarters,keep_on_record,registration_number,describe,filing_time,p_id)'},
 
-
-# base 补全
+	# base 补全
 	# tyc.tyc_jichu_quan
 	# {'sel_columns': 'quan_cheng, zuzhijigou_daima, nashui_shibie, gongshang_hao',
 	# 'sel_table': 'tyc_jichu_quan', 'db': 'tyc',
 	# 'inser_table': 'comp_basebuquan_tyc',
 	# 'inser_columns': '(comp_full_name, zuzhijigou_daima, nashui_shibie, gongshang_hao)'},
-
 
 	# 新实例增量
 	# base
@@ -70,9 +82,6 @@ sel_inser_list = [
 	# tianyancha.tyc_jichu_quan  8230939
 	# {'sel_columns': 'quan_cheng, c_desc', 'sel_table': 'tyc_jichu_quan', 'db': 'tianyancha',
 	#  'inser_table': 'comp_intro_tyc', 'inser_columns': '(comp_full_name, intro)'},
-
-
-
 
 	# base
 	# tyc.tyc_jichu_quan

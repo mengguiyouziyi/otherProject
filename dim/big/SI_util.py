@@ -89,7 +89,7 @@ def _sqlObj(db):
 	etl1.innotree.org
 	参数：数据库
 	"""
-	connect = pymysql.connect(host='etl1.innotree.org', port=3308, user='spider', password='spider', db=db,
+	connect = pymysql.connect(host='172.31.215.38', port=3306, user='spider', password='spider', db=db,
 	                          charset='utf8', cursorclass=pymysql.cursors.DictCursor)
 	cursor = connect.cursor()
 	return connect, cursor
@@ -113,9 +113,9 @@ def main(*args):
 	while True:
 		results = selectFun(args[0], args[1], start, 500000, db=args[2])
 		if not results:
-			# time.sleep(600)
-			# continue
-			return
+			time.sleep(600)
+			continue
+			# return
 		start += len(results)
 		value_list = []
 		for result in results:
