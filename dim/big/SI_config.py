@@ -12,11 +12,11 @@ sel_inser_list = [
 
 	# intro
 	# tyc.tyc_jichu_quan
-	{'sel_columns': 'comp_name, intro', 'sel_table': 'jianjie_shunqi_all', 'db': 'spider',
-	 'inser_table': 'comp_intro_shunqi', 'inser_columns': '(comp_full_name, intro)'},
+	# {'sel_columns': 'comp_name, intro', 'sel_table': 'jianjie_shunqi_all', 'db': 'spider',
+	#  'inser_table': 'comp_intro_shunqi', 'inser_columns': '(comp_full_name, intro)'},
 
-	# {'sel_columns': 'comp_name, intro', 'sel_table': 'jianjie_114_all', 'db': 'spider',
-	#  'inser_table': 'comp_intro_114', 'inser_columns': '(comp_full_name, intro)'},
+	{'sel_columns': 'comp_name, intro', 'sel_table': 'jianjie_114_all', 'db': 'spider',
+	 'inser_table': 'comp_intro_114', 'inser_columns': '(comp_full_name, intro)'},
 	#
 	# {'sel_columns': 'comp_name, intro', 'sel_table': 'jianjie_huangye88_all', 'db': 'spider',
 	#  'inser_table': 'comp_intro_huangye88', 'inser_columns': '(comp_full_name, intro)'},
