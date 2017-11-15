@@ -113,9 +113,9 @@ def main(*args):
 	while True:
 		results = selectFun(args[0], args[1], start, 500000, db=args[2])
 		if not results:
-			# time.sleep(600)
-			# continue
-			return
+			time.sleep(400)
+			continue
+			# return
 		start += len(results)
 		value_list = []
 		for result in results:
