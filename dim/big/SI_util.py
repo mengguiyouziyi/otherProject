@@ -109,6 +109,7 @@ def _sqlObj1(db):
 def main(*args):
 	columns_list = args[0].split(',')
 	num = len(columns_list)
+	# shunqi 12582242
 	start = i = 0
 	while True:
 		results = selectFun(args[0], args[1], start, 500000, db=args[2])
