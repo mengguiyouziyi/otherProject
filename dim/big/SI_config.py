@@ -10,12 +10,25 @@ inser_table(插入表名)，inser_columns(插入字段) 即可
 """
 sel_inser_list = [
 	# app
-	# spider.360app
+	# spider.wandoujia
 	{
-		'sel_columns': 'auth, pic, pac_name, soft_name, is_official, down_num, score, apk_size, version, overview, des, app_cat, tag, update_time, comm_num, best_num, good_num, bad_num, likes',
-		'sel_table': 'app_360_update', 'db': 'spider',
-		'inser_table': 'item_app_360app',
-		'inser_columns': '(comp_full_name, app_pic, app_pack_name, app_name, is_gov, down_num, score, size, version, pictures, description, category, tags, update_time, comm_num, good_comm_num, mid_comm_num, bad_comm_num, also_likes)'},
+		'sel_columns': 'a_kaifa, a_logo, a_bao, a_name, a_xia, a_size, a_ban, a_jietu, a_desc, a_fen, a_tag, a_update, a_hap, a_ping, a_all',
+		'sel_table': 'wandoujia', 'db': 'spider',
+		'inser_table': 'item_app_wandoujia',
+		'inser_columns': '(comp_full_name, app_pic, app_pack_name, app_name, down_num, size, version, pictures, description, category, tags, update_time, good_comm_rate, comm_num, also_likes)'},
+
+	# spider.xiaomi
+	# {'sel_columns': 'a_kaifa, a_logo, a_bao, a_name, a_size, a_ban, a_jietu, a_desc, a_fen, a_update, a_ping, a_all',
+	#  'sel_table': 'xiaomi', 'db': 'spider',
+	#  'inser_table': 'item_app_xiaomi',
+	#  'inser_columns': '(comp_full_name, app_pic, app_pack_name, app_name, size, version, pictures, description, category, update_time, comm_num, also_likes)'},
+
+	# spider.360app
+	# {
+	# 	'sel_columns': 'auth, pic, pac_name, soft_name, is_official, down_num, score, apk_size, version, overview, des, app_cat, tag, update_time, comm_num, best_num, good_num, bad_num, likes',
+	# 	'sel_table': 'app_360_update', 'db': 'spider',
+	# 	'inser_table': 'item_app_360app',
+	# 	'inser_columns': '(comp_full_name, app_pic, app_pack_name, app_name, is_gov, down_num, score, size, version, pictures, description, category, tags, update_time, comm_num, good_comm_num, mid_comm_num, bad_comm_num, also_likes)'},
 
 	# # spider.hw_app
 	# {
@@ -30,7 +43,6 @@ sel_inser_list = [
 	# 	'sel_table': 'app_yyb_update', 'db': 'spider',
 	# 	'inser_table': 'item_app_yingyongbao',
 	# 	'inser_columns': '(comp_full_name, app_pic, app_pack_name, app_name, is_gov, down_num, score, size, version, pictures, description, category, update_time, comm_num, same_develop)'},
-
 
 	# intro
 	# tyc.tyc_jichu_quan
