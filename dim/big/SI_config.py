@@ -12,10 +12,10 @@ sel_inser_list = [
 	# app
 	# spider.wandoujia
 	{
-		# 'sel_columns': 'a_kaifa, a_logo, a_bao, a_name, a_xia, a_size, a_ban, a_jietu, a_desc, a_fen, a_tag, a_update, a_hap, a_ping, a_all',
-		# 'sel_table': 'wandoujia', 'db': 'spider',
-		# 'inser_table': 'item_app_wandoujia',
-		# 'inser_columns': '(comp_full_name, app_pic, app_pack_name, app_name, down_num, size, version, pictures, description, category, tags, update_time, good_comm_rate, comm_num, also_likes)'},
+		'sel_columns': 'a_kaifa, a_logo, a_bao, a_name, a_xia, a_size, a_ban, a_jietu, a_desc, a_fen, a_tag, a_update, a_hap, a_ping, a_all',
+		'sel_table': 'wandoujia', 'db': 'spider',
+		'inser_table': 'item_app_wandoujia',
+		'inser_columns': '(comp_full_name, app_pic, app_pack_name, app_name, down_num, size, version, pictures, description, category, tags, update_time, good_comm_rate, comm_num, also_likes)'},
 
 	# spider.xiaomi
 	{'sel_columns': 'a_kaifa, a_logo, a_bao, a_name, a_size, a_ban, a_jietu, a_desc, a_fen, a_update, a_ping, a_all',
