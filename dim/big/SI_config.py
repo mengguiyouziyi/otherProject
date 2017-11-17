@@ -24,25 +24,25 @@ sel_inser_list = [
 	 'inser_columns': '(comp_full_name, app_pic, app_pack_name, app_name, size, version, pictures, description, category, update_time, comm_num, also_likes)'},
 
 	# spider.360app
-	# {
-	# 	'sel_columns': 'auth, pic, pac_name, soft_name, is_official, down_num, score, apk_size, version, overview, des, app_cat, tag, update_time, comm_num, best_num, good_num, bad_num, likes',
-	# 	'sel_table': 'app_360_update', 'db': 'spider',
-	# 	'inser_table': 'item_app_360app',
-	# 	'inser_columns': '(comp_full_name, app_pic, app_pack_name, app_name, is_gov, down_num, score, size, version, pictures, description, category, tags, update_time, comm_num, good_comm_num, mid_comm_num, bad_comm_num, also_likes)'},
+	{
+		'sel_columns': 'auth, pic, pac_name, soft_name, is_official, down_num, score, apk_size, version, overview, des, app_cat, tag, update_time, comm_num, best_num, good_num, bad_num, likes',
+		'sel_table': 'app_360_update', 'db': 'spider',
+		'inser_table': 'item_app_360app',
+		'inser_columns': '(comp_full_name, app_pic, app_pack_name, app_name, is_gov, down_num, score, size, version, pictures, description, category, tags, update_time, comm_num, good_comm_num, mid_comm_num, bad_comm_num, also_likes)'},
 
 	# # spider.hw_app
-	# {
-	# 	'sel_columns': 'auth, logo_url, pname, soft_name, down_num, soft_score, soft_size, version, pic_url, des, create_date, comm_num',
-	# 	'sel_table': 'app_hw_update', 'db': 'spider',
-	# 	'inser_table': 'item_app_huawei',
-	# 	'inser_columns': '(comp_full_name, app_pic, app_pack_name, app_name, down_num, score, size, version, pictures, description, update_time, comm_num)'},
+	{
+		'sel_columns': 'auth, logo_url, pname, soft_name, down_num, soft_score, soft_size, version, pic_url, des, create_date, comm_num',
+		'sel_table': 'app_hw_update', 'db': 'spider',
+		'inser_table': 'item_app_huawei',
+		'inser_columns': '(comp_full_name, app_pic, app_pack_name, app_name, down_num, score, size, version, pictures, description, update_time, comm_num)'},
 	#
 	# # spider.yingyb
-	# {
-	# 	'sel_columns': 'authorName, iconUrl, pkgName, appName, isOfficial, appDownCount, averageRating, fileSize, versionName, images, description, categoryName, apkPublishTime, ratingCount, sameList',
-	# 	'sel_table': 'app_yyb_update', 'db': 'spider',
-	# 	'inser_table': 'item_app_yingyongbao',
-	# 	'inser_columns': '(comp_full_name, app_pic, app_pack_name, app_name, is_gov, down_num, score, size, version, pictures, description, category, update_time, comm_num, same_develop)'},
+	{
+		'sel_columns': 'authorName, iconUrl, pkgName, appName, isOfficial, appDownCount, averageRating, fileSize, versionName, images, description, categoryName, apkPublishTime, ratingCount, sameList',
+		'sel_table': 'app_yyb_update', 'db': 'spider',
+		'inser_table': 'item_app_yingyongbao',
+		'inser_columns': '(comp_full_name, app_pic, app_pack_name, app_name, is_gov, down_num, score, size, version, pictures, description, category, update_time, comm_num, same_develop)'},
 
 	# intro
 	# tyc.tyc_jichu_quan
