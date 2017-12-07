@@ -91,6 +91,7 @@ class Extract(object):
 		"""
 		sql = """select {col} from {db}.{tab} limit {start}, {num}""".format(
 			col=self.col_out, db=self.db_out, tab=self.tab_out, start=start, num=self.num)
+		print(sql)
 		try:
 			self.cur_out.execute(sql)
 			results = self.cur_out.fetchall()
@@ -107,6 +108,7 @@ class Extract(object):
 		"""
 		sql = """insert into {db}.{tab} ({col}) VALUES ({val})""".format(db=self.db_in, tab=self.tab_in,
 		                                                                 col=self.col_in, val=self.val_str)
+		print(sql)
 		try:
 			self.cur_in.executemany(sql, args_list)
 			self.conn_in.commit()
