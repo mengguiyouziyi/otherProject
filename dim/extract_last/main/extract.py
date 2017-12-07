@@ -4,13 +4,18 @@ import os
 import sys
 import logging
 import io
-from .. util.info import etl
+from os.path import dirname
+from extract_last.util.info import etl
 from .config import config_list
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
-path = os.path.abspath(os.path.dirname(__file__))
+father_path = dirname(dirname(os.path.abspath(dirname(__file__))))
+base_path = dirname(dirname(os.path.abspath(dirname(__file__))))
+path = dirname(os.path.abspath(dirname(__file__)))
 sys.path.append(path)
+sys.path.append(base_path)
+sys.path.append(father_path)
 
 logger = logging.getLogger(__name__)
 ch = logging.StreamHandler()
