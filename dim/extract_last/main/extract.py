@@ -2,10 +2,10 @@
 import traceback
 import os
 import sys
-import logging
+# import logging
 import io
 from os.path import dirname
-from dim.extract_last.util.info import etl
+from ..util.info import etl
 from .config import config_list
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
@@ -16,13 +16,12 @@ path = dirname(os.path.abspath(dirname(__file__)))
 sys.path.append(path)
 sys.path.append(base_path)
 sys.path.append(father_path)
-
-logger = logging.getLogger(__name__)
-ch = logging.StreamHandler()
-ch.setLevel(logging.DEBUG)
-formatter = logging.Formatter('%(asctime)s %(name)s- %(levelname)s - %(message)s')
-ch.setFormatter(formatter)
-logger.addHandler(ch)
+# logger = logging.getLogger(__name__)
+# ch = logging.StreamHandler()
+# ch.setLevel(logging.DEBUG)
+# formatter = logging.Formatter('%(asctime)s %(name)s- %(levelname)s - %(message)s')
+# ch.setFormatter(formatter)
+# logger.addHandler(ch)
 
 
 class Extract(object):
