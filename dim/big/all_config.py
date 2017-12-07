@@ -353,8 +353,11 @@ sel_inser_list = [
 	# # teaminfo
 	# # tyc.tyc_main
 	# 姓名、职位、简介、在职状态、头像、电话、邮箱
-	# {'sel_columns': 'company, web_url', 'sel_table': '36ke', 'db': 'tyc',
-	#  'inser_table': 'comp_web_36ke', 'inser_columns': '(comp_full_name, web_url)'},
+	# {'sel_columns': 'company, web_url',
+	# 'sel_table': '36ke',
+	# 'db': 'tyc',
+	#  'inser_table': 'comp_web_36ke',
+	# 'inser_columns': '(comp_full_name, web_url)'},
 
 ]
 
