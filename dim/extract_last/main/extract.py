@@ -4,7 +4,7 @@ import os
 import sys
 import logging
 import io
-from dim.extract_last.util.info import etl
+from extract_last.util.info import etl
 from .config import config_list
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
