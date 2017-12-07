@@ -5,7 +5,7 @@ import sys
 import logging
 import io
 from os.path import dirname
-from extract_last.util.info import etl
+from util.info import etl
 from .config import config_list
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
