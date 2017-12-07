@@ -5,8 +5,8 @@ import sys
 # import logging
 import io
 from os.path import dirname
-from .info import etl
-from .config import config_list
+from info import etl
+from config import config_list
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
