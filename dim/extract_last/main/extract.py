@@ -134,6 +134,7 @@ def main(start, config, in_cat):
 			# time.sleep(400)
 			# continue
 			print('no datas...')
+			# 当查询不到数据时，将当前sql游标写入到相应文件中如 base.txt(效果是覆盖写)
 			with open(in_cat + '.txt', 'w') as f:
 				f.write(start)
 			exit(1)

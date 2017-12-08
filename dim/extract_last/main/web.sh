@@ -7,5 +7,6 @@ pyenv deactivate
 pyenv activate env354
 cd /data1/spider/menggui/otherProject/dim/extract_last/main/
 tab_out="tyc_jichu_quan"
-# 脚本获取第二个参数作为start
-nohup python extract.py ${tab_out} web $(cat web.txt) >> web.out 2>&1 &
+in_cat="web"
+start_num=$(cat web.txt)
+nohup python extract.py ${tab_out} ${in_cat} ${start_num} >> ${in_cat}.out 2>&1 &
