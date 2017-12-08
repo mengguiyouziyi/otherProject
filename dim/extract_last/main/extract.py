@@ -28,7 +28,7 @@ sys.path.append(father_path)
 
 class Extract(object):
 	def __init__(self, tab_out, tab_in, col_out, col_in, db_out='tyc', db_in='spider_dim', conn_out=etl, conn_in=etl,
-	             num=100000):
+	             num=300000):
 		"""
 
 		:param tab_out: 查询表
@@ -109,7 +109,7 @@ class Extract(object):
 		:return:
 		"""
 		sql = """insert into {db}.{tab} {col} VALUES ({val})""".format(db=self.db_in, tab=self.tab_in,
-		                                                                 col=self.col_in, val=self.val_str)
+		                                                               col=self.col_in, val=self.val_str)
 		print(sql)
 		try:
 			self.cur_in.executemany(sql, args_list)
@@ -118,7 +118,7 @@ class Extract(object):
 			traceback.print_exc()
 
 
-def main(start, config):
+def main(start, config, in_cat):
 	"""
 	主函数，逻辑为循环查询，去掉除name之外所有为空的行，并50000条插入
 	:param start:
@@ -134,11 +134,12 @@ def main(start, config):
 			# time.sleep(400)
 			# continue
 			print('no datas...')
+			with open(in_cat + '.txt', 'w') as f:
+				f.write(start)
 			exit(1)
 		value_list = []
 		for result in results:
 			start += 1
-			print(start)
 			# 去空，当空字段的个数大于要查询的字段个数时，说明除了comp_full_name之外所有字段都是空的
 			n = 0
 			for val in result.values():
@@ -151,9 +152,11 @@ def main(start, config):
 			if len(value_list) == 50000:
 				extract.insertManyFun(value_list)
 				value_list.clear()
+				print(start)
 			else:
 				continue
 		extract.insertManyFun(value_list)
+		print(start)
 
 
 if __name__ == '__main__':
@@ -167,7 +170,7 @@ if __name__ == '__main__':
 	start = int(sys.argv[3])
 	for conf in config_list:
 		if tab_out == conf['sel_table'] and in_cat in conf['inser_table']:
-			main(start, conf)
+			main(start, conf, in_cat)
 			break
 		else:
 			print('Dont find this out table or insert categary is wrong,please insert again!')

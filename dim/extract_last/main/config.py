@@ -163,7 +163,7 @@ config_list = [
 		'sel_columns': 'quan_cheng, tongyi_xinyong, qiye_leixing, fa_ren, zhuce_ziben, zhuce_shijian, dengji_jiguan, yingye_nianxian, jingying_zhuangtai, hezhun_riqi, jingying_fanwei',
 		'sel_table': 'tyc_jichu_quan',
 		'db': 'tyc',
-		'inser_table': 'comp_base_tyc_copy',
+		'inser_table': 'comp_base_tyc',
 		'inser_columns': '(comp_full_name, CreditCode, EconKind, LegalPerson, RegistCapi, CreateTime, BelongOrg, BusinessLife, RegistStatus, CheckDate, BusinessScope)'},
 
 	# web
