@@ -165,7 +165,7 @@ if __name__ == '__main__':
 	"""
 	tab_out = sys.argv[1]
 	in_cat = sys.argv[2]
-	start = sys.argv[3]
+	start = int(sys.argv[3])
 	for conf in config_list:
 		if tab_out == conf['sel_table'] and in_cat in conf['inser_table']:
 			main(start, conf)
