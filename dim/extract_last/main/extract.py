@@ -16,6 +16,8 @@ path = dirname(os.path.abspath(dirname(__file__)))
 sys.path.append(path)
 sys.path.append(base_path)
 sys.path.append(father_path)
+
+
 # logger = logging.getLogger(__name__)
 # ch = logging.StreamHandler()
 # ch.setLevel(logging.DEBUG)
@@ -123,8 +125,8 @@ def main(start, config):
 	:param config:
 	:return:
 	"""
-	args = [config['sel_columns'], config['sel_table'], config['db'], config['inser_table'], config['inser_columns']]
-	extract = Extract(*args)
+	extract = Extract(tab_out=config['sel_table'], tab_in=config['inser_table'], col_out=config['sel_columns'],
+	                  col_in=config['inser_columns'], db_out=config['db'], )
 	while True:
 		results = extract.selectFun(start)
 		if not results:
