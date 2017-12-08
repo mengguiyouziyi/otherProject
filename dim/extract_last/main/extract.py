@@ -125,6 +125,7 @@ def main(start, config):
 	:param config:
 	:return:
 	"""
+	print(config)
 	extract = Extract(tab_out=config['sel_table'], tab_in=config['inser_table'], col_out=config['sel_columns'],
 	                  col_in=config['inser_columns'], db_out=config['db'], )
 	while True:
