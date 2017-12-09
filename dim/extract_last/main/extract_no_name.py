@@ -152,6 +152,7 @@ def main(start, config, in_cat):
 		value_list = []
 		for result in results:
 			start += 1
+			print(start)
 			t_results = extract.searchFun(result['t_id'])
 			if not t_results:
 				continue
@@ -186,7 +187,6 @@ if __name__ == '__main__':
 	start = int(sys.argv[3])
 	print(tab_out, in_cat, start)
 	for conf in config_list:
-		print(conf['sel_table'])
 		if tab_out == conf['sel_table'] and in_cat in conf['inser_table']:
 			main(start, conf, in_cat)
 			break
