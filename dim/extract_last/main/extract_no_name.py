@@ -186,6 +186,7 @@ if __name__ == '__main__':
 	start = int(sys.argv[3])
 	print(tab_out, in_cat, start)
 	for conf in config_list:
+		print(conf['sel_table'])
 		if tab_out == conf['sel_table'] and in_cat in conf['inser_table']:
 			main(start, conf, in_cat)
 			break
