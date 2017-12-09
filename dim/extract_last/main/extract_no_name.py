@@ -165,14 +165,15 @@ def main(start, config, in_cat):
 		t_result = {}
 		t_result.update(tyc_result)
 		t_result.update(tianyancha_result)
+		print(t_result)
 		value_list = []
 		for result in results:
 			start += 1
 			if start % 2000 == 0:
 				print(start)
 			t_id = result['t_id']
-			print(t_result)
 			result['comp_full_name'] = t_result.get(t_id)
+			print(result)
 			# 去空，当空字段的个数大于要查询的字段个数时，说明除了comp_full_name之外所有字段都是空的
 			n = 0
 			for val in result.values():
