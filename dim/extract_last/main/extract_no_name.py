@@ -124,8 +124,6 @@ class Extract(object):
 		sql = """insert into {db}.{tab} {col} VALUES ({val})""".format(db=self.db_in, tab=self.tab_in,
 		                                                               col=self.col_in, val=self.val_str)
 		try:
-			print(sql)
-			print(args_list)
 			self.cur_in.executemany(sql, args_list)
 			self.conn_in.commit()
 		except:
@@ -153,27 +151,22 @@ def main(start, config, in_cat):
 			with open(in_cat + '.txt', 'w') as f:
 				f.write(start)
 			exit(1)
-
-		tyc_result = extract.searchFun('tyc', tuple([result['t_id'] for result in results]))
-		if not tyc_result:
-			print('no tyc_result {t_id: name, t_id: name....}')
-			exit(1)
-		tianyancha_result = extract.searchFun('tianyancha', tuple([result['t_id'] for result in results]))
-		if not tianyancha_result:
-			print('no tianyancha_result {t_id: name, t_id: name....}')
-			exit(1)
-		t_result = {}
-		t_result.update(tyc_result)
-		t_result.update(tianyancha_result)
-		print(t_result)
+		t_id_tuple = tuple([result['t_id'] for result in results])
+		tyc_result = extract.searchFun('tyc', t_id_tuple)
+		tianyancha_result = extract.searchFun('tianyancha', t_id_tuple)
+		print(t_id_tuple, tyc_result, tianyancha_result)
+		# if not tianyancha_result:
+		# 	print('no tianyancha_result {t_id: name, t_id: name....}')
+		# 	exit(1)
 		value_list = []
 		for result in results:
 			start += 1
 			if start % 2000 == 0:
 				print(start)
 			t_id = result['t_id']
-			result['comp_full_name'] = t_result.get(t_id)
-			print(result)
+			result['comp_full_name'] = ''
+			result['comp_full_name'] = tyc_result.get(t_id)
+			result['comp_full_name'] = tianyancha_result.get(t_id)
 			# 去空，当空字段的个数大于要查询的字段个数时，说明除了comp_full_name之外所有字段都是空的
 			n = 0
 			for val in result.values():
