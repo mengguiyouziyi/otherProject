@@ -85,14 +85,14 @@ class Extract(object):
 			x += y
 		return x
 
-	def selectFun(self, start=0):
+	def selectFun(self, start=1):
 		"""
 		查询函数
 		:param start:
 		:return:
 		"""
-		sql = """select {col} from {db}.{tab} WHERE id BETWEEN {start} and {end}""".format(
-			col=self.col_out, db=self.db_out, tab=self.tab_out, start=start, end=start + self.num)
+		sql = """select id, {col} from {db}.{tab} WHERE id > {start} limit {steps}""".format(
+			col=self.col_out, db=self.db_out, tab=self.tab_out, start=start, steps=self.num)
 		try:
 			self.cur_out.execute(sql)
 			results = self.cur_out.fetchall()
@@ -162,9 +162,7 @@ def main(start, config, in_cat):
 		# 	exit(1)
 		value_list = []
 		for result in results:
-			start += 1
-			# if start % 1000 == 0:
-			# 	print(start)
+			start = result['id']
 			t_id = result['t_id']
 			tyc_name = tyc_result.get(t_id, '')
 			result['comp_full_name'] = tyc_name
