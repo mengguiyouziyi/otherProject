@@ -166,9 +166,8 @@ def main(start, config, in_cat):
 			# if start % 1000 == 0:
 			# 	print(start)
 			t_id = result['t_id']
-			result['comp_full_name'] = ''
-			result['comp_full_name'] = tyc_result.get(t_id)
-			result['comp_full_name'] = tianyancha_result.get(t_id)
+			tyc_name = tyc_result.get(t_id, '')
+			result['comp_full_name'] = tyc_name if tyc_name else tianyancha_result.get(t_id, '')
 			# 去空，当空字段的个数大于要查询的字段个数时，说明除了comp_full_name之外所有字段都是空的
 			n = 0
 			for val in result.values():
