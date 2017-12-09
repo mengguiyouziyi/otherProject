@@ -101,13 +101,14 @@ class Extract(object):
 			traceback.print_exc()
 		return None
 
-	def searchFun(self, t_id_tuple):
-		sql = """select quan_cheng, t_id from tyc.tyc_jichu_quan where t_id in {t_id_tuple}""".format(
-			t_id_tuple=t_id_tuple
+	def searchFun(self, db, t_id_tuple):
+		sql = """select quan_cheng, t_id from {db}.tyc_jichu_quan where t_id in {t_id_tuple}""".format(
+			db=db, t_id_tuple=t_id_tuple
 		)
 		try:
 			self.cur_out.execute(sql)
 			results = self.cur_out.fetchall()
+
 			results = {result['t_id']: result['quan_cheng'] for result in results}
 			return results
 		except:
@@ -151,18 +152,24 @@ def main(start, config, in_cat):
 				f.write(start)
 			exit(1)
 
-		t_result = extract.searchFun(tuple([result['t_id'] for result in results]))
-		if not t_result:
-			print('no {t_id: name, t_id: name....}')
+		tyc_result = extract.searchFun('tyc', tuple([result['t_id'] for result in results]))
+		if not tyc_result:
+			print('no tyc_result {t_id: name, t_id: name....}')
 			exit(1)
-
+		tianyancha_result = extract.searchFun('tianyancha', tuple([result['t_id'] for result in results]))
+		if not tianyancha_result:
+			print('no tianyancha_result {t_id: name, t_id: name....}')
+			exit(1)
+		t_result = {}
+		t_result.update(tyc_result)
+		t_result.update(tianyancha_result)
 		value_list = []
 		for result in results:
 			start += 1
 			if start % 2000 == 0:
 				print(start)
 			t_id = result['t_id']
-			result['comp_full_name'] = t_result[t_id]
+			result['comp_full_name'] = t_result.get(t_id)
 			# 去空，当空字段的个数大于要查询的字段个数时，说明除了comp_full_name之外所有字段都是空的
 			n = 0
 			for val in result.values():
