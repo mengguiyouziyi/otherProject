@@ -150,7 +150,7 @@ def main(start, config, in_cat):
 			print('no datas...')
 			# 当查询不到数据时，将当前sql游标写入到相应文件中如 base.txt(效果是覆盖写)
 			with open(in_cat + '.txt', 'w') as f:
-				f.write(start)
+				f.write(str(start))
 			exit(1)
 		# 获取 comp_full_name
 		t_id_tuple = tuple(set([result['t_id'] for result in results]))
@@ -163,8 +163,8 @@ def main(start, config, in_cat):
 		value_list = []
 		for result in results:
 			start += 1
-			if start % 500 == 0:
-				print(start)
+			# if start % 1000 == 0:
+			# 	print(start)
 			t_id = result['t_id']
 			result['comp_full_name'] = ''
 			result['comp_full_name'] = tyc_result.get(t_id)
