@@ -190,6 +190,6 @@ if __name__ == '__main__':
 		if tab_out == conf['sel_table'] and in_cat in conf['inser_table']:
 			main(start, conf, in_cat)
 			break
-		else:
-			print('Dont find this out table or insert categary is wrong,please insert again!')
-			exit(1)
+		# else:
+		# 	print('Dont find this out table or insert categary is wrong,please insert again!')
+		# 	exit(1)
