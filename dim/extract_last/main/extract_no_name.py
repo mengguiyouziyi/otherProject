@@ -101,6 +101,18 @@ class Extract(object):
 			traceback.print_exc()
 		return None
 
+	def searchFun(self, t_id):
+		sql = """select quan_cheng from tyc.tyc_jichu_quan where t_id = {t_id}""".format(
+			t_id=t_id
+		)
+		try:
+			self.cur_out.execute(sql)
+			results = self.cur_out.fetchall()
+			return results
+		except:
+			traceback.print_exc()
+		return None
+
 	def insertManyFun(self, args_list):
 		"""
 		多条插入函数
@@ -121,6 +133,7 @@ def main(start, config, in_cat):
 	主函数，逻辑为循环查询，去掉除name之外所有为空的行，并50000条插入
 	:param start:
 	:param config:
+	:param in_cat: 表维度类型
 	:return:
 	"""
 	extract = Extract(tab_out=config['sel_table'], tab_in=config['inser_table'], col_out=config['sel_columns'],
@@ -139,6 +152,10 @@ def main(start, config, in_cat):
 		value_list = []
 		for result in results:
 			start += 1
+			t_results = extract.searchFun(result['t_id'])
+			if not t_results:
+				continue
+			result['comp_full_name'] = t_results[0]['quan_cheng']
 			# 去空，当空字段的个数大于要查询的字段个数时，说明除了comp_full_name之外所有字段都是空的
 			n = 0
 			for val in result.values():

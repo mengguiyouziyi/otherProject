@@ -207,5 +207,30 @@ config_list = [
 	 'db': 'tyc',
 	 'inser_table': 'comp_intro_tyc',
 	 'inser_columns': '(comp_full_name, intro)'},
+
+	# gudong
+	{'sel_columns': 't_id, p_name, p_tid, chuzi_bili, renjiao_chuzi',
+	 'sel_table': 'tyc_gudongxin',
+	 'db': 'tyc',
+	 'inser_table': 'comp_gudong_tyc',
+	 'inser_columns': '(comp_full_name, t_id, p_name, p_tid, chuzi_bili, renjiao_chuzi)'},
+
+	# duiwai 691061
+	{
+		'sel_columns': 't_id, invest_name, invest_tid, representative, rep_tid, register_amount, register_date, investment_amount, investment_rate, com_status',
+		'sel_table': 'tyc_out_investment',
+		'db': 'tyc',
+		'inser_table': 'comp_duiwai_tyc',
+		'inser_columns': '(comp_full_name, t_id, invest_name, invest_tid, representative, rep_tid, register_amount, register_date, investment_amount, investment_rate, com_status)'},
+
+	# teaminfo
+	{
+		'sel_columns': 't_id, m_name, m_position, logo_url, m_experience',
+		'sel_table': 'tyc_core_team',
+		'db': 'tyc',
+		'inser_table': 'comp_teaminfo_tyc',
+		'inser_columns': '(comp_full_name, t_id, staffName, staffPosition, headPic, m_experience)'
+	},
+
 ]
 ##########################################################################################
