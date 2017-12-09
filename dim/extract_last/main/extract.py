@@ -161,7 +161,7 @@ def main(start, config, in_cat):
 if __name__ == '__main__':
 	"""传入三个参数
 	第一个为插入表格 tyc_jichu_quan
-	第二个是插入类型 base intro logo officeaddr registaddr shortname teaminfo web
+	第二个是插入类型 base intro logo officeaddr registaddr shortname teaminfo web gudong duiwai teaminfo
 	第三个是查询游标 15384877
 	"""
 	tab_out = sys.argv[1]
