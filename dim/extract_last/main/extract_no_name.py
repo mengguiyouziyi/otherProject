@@ -28,7 +28,7 @@ sys.path.append(father_path)
 
 class Extract(object):
 	def __init__(self, tab_out, tab_in, col_out, col_in, db_out='tyc', db_in='spider_dim', conn_out=etl, conn_in=etl,
-	             num=500000):
+	             num=100000):
 		"""
 
 		:param tab_out: 查询表
@@ -101,13 +101,14 @@ class Extract(object):
 			traceback.print_exc()
 		return None
 
-	def searchFun(self, t_id):
-		sql = """select quan_cheng from tyc.tyc_jichu_quan where t_id = '{t_id}'""".format(
-			t_id=t_id
+	def searchFun(self, t_id_tuple):
+		sql = """select quan_cheng, t_id from tyc.tyc_jichu_quan where t_id in {t_id_tuple}""".format(
+			t_id_tuple=t_id_tuple
 		)
 		try:
 			self.cur_out.execute(sql)
 			results = self.cur_out.fetchall()
+			results = {result['t_id']: result['quan_cheng'] for result in results}
 			return results
 		except:
 			traceback.print_exc()
@@ -149,14 +150,19 @@ def main(start, config, in_cat):
 			with open(in_cat + '.txt', 'w') as f:
 				f.write(start)
 			exit(1)
+
+		t_result = extract.searchFun(tuple([result['t_id'] for result in results]))
+		if not t_result:
+			print('no {t_id: name, t_id: name....}')
+			exit(1)
+
 		value_list = []
 		for result in results:
 			start += 1
-			print(start)
-			t_results = extract.searchFun(result['t_id'])
-			if not t_results:
-				continue
-			result['comp_full_name'] = t_results[0]['quan_cheng']
+			if start % 2000 == 0:
+				print(start)
+			t_id = result['t_id']
+			result['comp_full_name'] = t_result[t_id]
 			# 去空，当空字段的个数大于要查询的字段个数时，说明除了comp_full_name之外所有字段都是空的
 			n = 0
 			for val in result.values():
