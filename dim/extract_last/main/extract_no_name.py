@@ -102,7 +102,7 @@ class Extract(object):
 		return None
 
 	def searchFun(self, t_id):
-		sql = """select quan_cheng from tyc.tyc_jichu_quan where t_id = {t_id}""".format(
+		sql = """select quan_cheng from tyc.tyc_jichu_quan where t_id = '{t_id}'""".format(
 			t_id=t_id
 		)
 		try:
@@ -184,7 +184,7 @@ if __name__ == '__main__':
 	"""
 	tab_out = sys.argv[1]
 	in_cat = sys.argv[2]
-	start = sys.argv[3]
+	start = int(sys.argv[3])
 	print(tab_out, in_cat, start)
 	for conf in config_list:
 		if tab_out == conf['sel_table'] and in_cat in conf['inser_table']:
