@@ -176,7 +176,7 @@ def main(start, config, in_cat):
 				continue
 			values = [result[extract.col_out_list[i].strip()] for i in range(extract.col_out_num)]
 			value_list.append(values)
-			if len(value_list) == 50000:
+			if len(value_list) == 5:
 				extract.insertManyFun(value_list)
 				value_list.clear()
 				print(start)
