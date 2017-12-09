@@ -91,8 +91,8 @@ class Extract(object):
 		:param start:
 		:return:
 		"""
-		sql = """select id, {col} from {db}.{tab} WHERE id BETWEEN {start} and {end}""".format(
-			col=self.col_out, db=self.db_out, tab=self.tab_out, start=start, end=start + self.num)
+		sql = """select id, {col} from {db}.{tab} WHERE id > {start} limit {steps}""".format(
+			col=self.col_out, db=self.db_out, tab=self.tab_out, start=start, steps=self.num)
 		try:
 			self.cur_out.execute(sql)
 			results = self.cur_out.fetchall()
