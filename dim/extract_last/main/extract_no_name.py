@@ -28,7 +28,7 @@ sys.path.append(father_path)
 
 class Extract(object):
 	def __init__(self, tab_out, tab_in, col_out, col_in, db_out='tyc', db_in='spider_dim', conn_out=etl, conn_in=etl,
-	             num=10000):
+	             num=5000):
 		"""
 
 		:param tab_out: 查询表
@@ -179,7 +179,7 @@ def main(start, config, in_cat):
 			values = [result[extract.col_out_list[i].strip()] for i in range(extract.col_out_num)]
 			values.insert(0, result['comp_full_name'])
 			value_list.append(values)
-			if len(value_list) == 5000:
+			if len(value_list) == 4000:
 				extract.insertManyFun(value_list)
 				value_list.clear()
 				print(start)
