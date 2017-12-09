@@ -147,13 +147,13 @@ def main(start, config, in_cat):
 			# time.sleep(400)
 			# continue
 			print('no datas...')
-			# 当查询不到数据时，将当前sql游标写入到相应文件中如 base.txt(效果是覆盖写)
+			# 当查询不到数据时，将当前sql游标写入到相应文件中如 base.txt(覆盖写)
 			with open(in_cat + '.txt', 'w') as f:
 				f.write(str(start))
 			exit(1)
 		# 获取 comp_full_name
 		t_id_tuple = tuple(set([result['t_id'] for result in results]))
-		print('length: ', len(t_id_tuple))
+		# print('length: ', len(t_id_tuple))
 		tyc_result = extract.searchFun('tyc', t_id_tuple)
 		# tianyancha_result = extract.searchFun('tianyancha', t_id_tuple)
 		# print(t_id_tuple, tyc_result, tianyancha_result)
