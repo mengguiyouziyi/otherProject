@@ -28,7 +28,7 @@ sys.path.append(father_path)
 
 class Extract(object):
 	def __init__(self, tab_out, tab_in, col_out, col_in, db_out='tyc', db_in='spider_dim', conn_out=etl, conn_in=etl,
-	             num=10):
+	             num=2):
 		"""
 
 		:param tab_out: 查询表
@@ -124,6 +124,8 @@ class Extract(object):
 		sql = """insert into {db}.{tab} {col} VALUES ({val})""".format(db=self.db_in, tab=self.tab_in,
 		                                                               col=self.col_in, val=self.val_str)
 		try:
+			print(sql)
+			print(args_list)
 			self.cur_in.executemany(sql, args_list)
 			self.conn_in.commit()
 		except:
