@@ -28,7 +28,7 @@ sys.path.append(father_path)
 
 class Extract(object):
 	def __init__(self, tab_out, tab_in, col_out, col_in, db_out='tyc', db_in='spider_dim', conn_out=etl, conn_in=etl,
-	             num=2):
+	             num=100000):
 		"""
 
 		:param tab_out: 查询表
@@ -124,7 +124,7 @@ class Extract(object):
 		sql = """insert into {db}.{tab} {col} VALUES ({val})""".format(db=self.db_in, tab=self.tab_in,
 		                                                               col=self.col_in, val=self.val_str)
 		try:
-			print(sql, args_list)
+			# print(sql, args_list)
 			self.cur_in.executemany(sql, args_list)
 			self.conn_in.commit()
 		except:
@@ -153,17 +153,17 @@ def main(start, config, in_cat):
 				f.write(start)
 			exit(1)
 		# 获取 comp_full_name
-		t_id_tuple = tuple([result['t_id'] for result in results])
+		t_id_tuple = tuple(set([result['t_id'] for result in results]))
 		tyc_result = extract.searchFun('tyc', t_id_tuple)
 		tianyancha_result = extract.searchFun('tianyancha', t_id_tuple)
-		print(t_id_tuple, tyc_result, tianyancha_result)
+		# print(t_id_tuple, tyc_result, tianyancha_result)
 		# if not tianyancha_result:
 		# 	print('no tianyancha_result {t_id: name, t_id: name....}')
 		# 	exit(1)
 		value_list = []
 		for result in results:
 			start += 1
-			if start % 2000 == 0:
+			if start % 500 == 0:
 				print(start)
 			t_id = result['t_id']
 			result['comp_full_name'] = ''
@@ -177,8 +177,9 @@ def main(start, config, in_cat):
 			if n >= extract.col_out_num - 1:
 				continue
 			values = [result[extract.col_out_list[i].strip()] for i in range(extract.col_out_num)]
+			values.insert(0, result['comp_full_name'])
 			value_list.append(values)
-			if len(value_list) == 5:
+			if len(value_list) == 50000:
 				extract.insertManyFun(value_list)
 				value_list.clear()
 				print(start)
