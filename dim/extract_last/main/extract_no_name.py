@@ -108,7 +108,6 @@ class Extract(object):
 		try:
 			self.cur_out.execute(sql)
 			results = self.cur_out.fetchall()
-
 			results = {result['t_id']: result['quan_cheng'] for result in results}
 			return results
 		except:
@@ -154,8 +153,9 @@ def main(start, config, in_cat):
 			exit(1)
 		# 获取 comp_full_name
 		t_id_tuple = tuple(set([result['t_id'] for result in results]))
+		print('length: ', len(t_id_tuple))
 		tyc_result = extract.searchFun('tyc', t_id_tuple)
-		tianyancha_result = extract.searchFun('tianyancha', t_id_tuple)
+		# tianyancha_result = extract.searchFun('tianyancha', t_id_tuple)
 		# print(t_id_tuple, tyc_result, tianyancha_result)
 		# if not tianyancha_result:
 		# 	print('no tianyancha_result {t_id: name, t_id: name....}')
@@ -167,7 +167,8 @@ def main(start, config, in_cat):
 			# 	print(start)
 			t_id = result['t_id']
 			tyc_name = tyc_result.get(t_id, '')
-			result['comp_full_name'] = tyc_name if tyc_name else tianyancha_result.get(t_id, '')
+			result['comp_full_name'] = tyc_name
+			# result['comp_full_name'] = tyc_name if tyc_name else tianyancha_result.get(t_id, '')
 			# 去空，当空字段的个数大于要查询的字段个数时，说明除了comp_full_name之外所有字段都是空的
 			n = 0
 			for val in result.values():
