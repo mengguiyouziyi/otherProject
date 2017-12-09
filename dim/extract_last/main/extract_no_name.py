@@ -124,6 +124,7 @@ class Extract(object):
 		sql = """insert into {db}.{tab} {col} VALUES ({val})""".format(db=self.db_in, tab=self.tab_in,
 		                                                               col=self.col_in, val=self.val_str)
 		try:
+			print(sql, args_list)
 			self.cur_in.executemany(sql, args_list)
 			self.conn_in.commit()
 		except:
@@ -151,6 +152,7 @@ def main(start, config, in_cat):
 			with open(in_cat + '.txt', 'w') as f:
 				f.write(start)
 			exit(1)
+		# 获取 comp_full_name
 		t_id_tuple = tuple([result['t_id'] for result in results])
 		tyc_result = extract.searchFun('tyc', t_id_tuple)
 		tianyancha_result = extract.searchFun('tianyancha', t_id_tuple)
