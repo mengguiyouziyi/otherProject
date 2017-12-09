@@ -179,7 +179,7 @@ def main(start, config, in_cat):
 			values = [result[extract.col_out_list[i].strip()] for i in range(extract.col_out_num)]
 			values.insert(0, result['comp_full_name'])
 			value_list.append(values)
-			if len(value_list) == 4000:
+			if len(value_list) == 5000:
 				extract.insertManyFun(value_list)
 				value_list.clear()
 				print(start)
