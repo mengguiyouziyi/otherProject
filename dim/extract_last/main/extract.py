@@ -85,13 +85,13 @@ class Extract(object):
 			x += y
 		return x
 
-	def selectFun(self, start=0):
+	def selectFun(self, start=1):
 		"""
 		查询函数
 		:param start:
 		:return:
 		"""
-		sql = """select {col} from {db}.{tab} WHERE id BETWEEN {start} and {end}""".format(
+		sql = """select id, {col} from {db}.{tab} WHERE id BETWEEN {start} and {end}""".format(
 			col=self.col_out, db=self.db_out, tab=self.tab_out, start=start, end=start + self.num)
 		try:
 			self.cur_out.execute(sql)
@@ -134,11 +134,11 @@ def main(start, config, in_cat):
 			print('no datas...')
 			# 当查询不到数据时，将当前sql游标写入到相应文件中如 base.txt(效果是覆盖写)
 			with open(in_cat + '.txt', 'w') as f:
-				f.write(start)
+				f.write(str(start))
 			exit(1)
 		value_list = []
 		for result in results:
-			start += 1
+			start = result['id']
 			# 去空，当空字段的个数大于要查询的字段个数时，说明除了comp_full_name之外所有字段都是空的
 			n = 0
 			for val in result.values():
@@ -171,6 +171,3 @@ if __name__ == '__main__':
 		if tab_out == conf['sel_table'] and in_cat in conf['inser_table']:
 			main(start, conf, in_cat)
 			break
-		else:
-			print('Dont find this out table or insert categary is wrong,please insert again!')
-			exit(1)
